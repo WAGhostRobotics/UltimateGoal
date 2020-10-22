@@ -31,7 +31,6 @@ public class DriveAuto {
         }
         new TeleOpParent().sleep((int) (seconds * 1000)); //TODO: deal with sleep call
         DriveStyle.stop(motors);
-        // adding this just for commit purposes
     }
 
     public void turn(TurnDirection direction, double power, double heading, Gyro gyro) {
