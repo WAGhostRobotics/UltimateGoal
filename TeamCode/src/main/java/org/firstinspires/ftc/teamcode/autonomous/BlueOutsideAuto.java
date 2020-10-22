@@ -2,12 +2,12 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name = "Red Outside", group = "competition")
-public class RedOutsideAuto extends AutonomousParent {
+@Autonomous(name = "Blue Outside", group = "competition")
+public class BlueOutsideAuto extends AutonomousParent {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        teamColor = TeamColor.RED;
+        teamColor = TeamColor.BLUE;
         startLocation = StartLocation.OUTSIDE;
         super.runOpMode();
     }
