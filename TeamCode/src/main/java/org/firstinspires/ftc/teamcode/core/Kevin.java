@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import java.util.ArrayList;
-
+// TODO: change name to whatever the programming kids want it to be
 public class Kevin {
     public static HardwareMap hardwareMap;
 
