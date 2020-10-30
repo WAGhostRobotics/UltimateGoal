@@ -10,6 +10,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.0'
+        implementation 'org.ftc.openftc:easyopencv:1.4.1'
     }
 }
 
