@@ -24,12 +24,12 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.vision.opencv_repackaged.opencv_andorid_sdk.src.main.java.org.opencv.core.Core;
-import org.firstinspires.ftc.teamcode.vision.opencv_repackaged.opencv_andorid_sdk.src.main.java.org.opencv.core.Mat;
-import org.firstinspires.ftc.teamcode.vision.opencv_repackaged.opencv_andorid_sdk.src.main.java.org.opencv.core.Point;
-import org.firstinspires.ftc.teamcode.vision.opencv_repackaged.opencv_andorid_sdk.src.main.java.org.opencv.core.Rect;
-import org.firstinspires.ftc.teamcode.vision.opencv_repackaged.opencv_andorid_sdk.src.main.java.org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
+import vision.opencv_repackaged.opencv_andorid_sdk.src.main.java.org.opencv.core.Core;
+import vision.opencv_repackaged.opencv_andorid_sdk.src.main.java.org.opencv.core.Mat;
+import vision.opencv_repackaged.opencv_andorid_sdk.src.main.java.org.opencv.core.Point;
+import vision.opencv_repackaged.opencv_andorid_sdk.src.main.java.org.opencv.core.Rect;
+import vision.opencv_repackaged.opencv_andorid_sdk.src.main.java.org.opencv.core.Scalar;
+import vision.opencv_repackaged.opencv_andorid_sdk.src.main.java.org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
