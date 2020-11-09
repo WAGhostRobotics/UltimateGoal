@@ -1,12 +1,8 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.teamcode.core.CVLinearOpMode;
-import org.firstinspires.ftc.teamcode.core.Kevin;
+import org.firstinspires.ftc.teamcode.core.Sonic;
 import org.firstinspires.ftc.teamcode.library.DriveAuto;
-import org.firstinspires.ftc.teamcode.library.DriveStyle;
-import org.firstinspires.ftc.teamcode.library.MecanumTrigMath;
 
 public class AutonomousParent extends CVLinearOpMode {
 
@@ -14,7 +10,7 @@ public class AutonomousParent extends CVLinearOpMode {
     StartLocation startLocation = StartLocation.OUTSIDE;
     TeamColor teamColor = TeamColor.RED;
 
-    private DriveAuto drivetrain = new DriveAuto(Kevin.driveMotors);
+    private DriveAuto drivetrain = new DriveAuto(Sonic.driveMotors);
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -23,7 +19,7 @@ public class AutonomousParent extends CVLinearOpMode {
         telemetry.addData("Status", "Initializing...");
         telemetry.update();
 
-        Kevin.init(hardwareMap);
+        Sonic.init(hardwareMap);
 
         vuforiaInit();
         vuforiaActivate();

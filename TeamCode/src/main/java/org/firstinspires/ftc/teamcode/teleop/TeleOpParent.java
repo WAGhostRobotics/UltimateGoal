@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.core.Kevin;
+import org.firstinspires.ftc.teamcode.core.Sonic;
 import org.firstinspires.ftc.teamcode.library.DriveStyle;
 
 public class TeleOpParent extends LinearOpMode {
@@ -30,7 +30,7 @@ public class TeleOpParent extends LinearOpMode {
         telemetry.update();
 
         // Initialize the robot hardware
-        Kevin.init(hardwareMap);
+        Sonic.init(hardwareMap);
 
         // Send diagnostics to user
         telemetry.addData("Status", "Initialized");
@@ -48,7 +48,7 @@ public class TeleOpParent extends LinearOpMode {
             */
 
             // Drivie using set drivemode (g1.ls/rs, g1.lb/rb)
-            DriveStyle.driveWithType(Kevin.driveMotors, gamepad1, type);
+            DriveStyle.driveWithType(Sonic.driveMotors, gamepad1, type);
 
             // Winch control (g2.du/dd)
             if (gamepad2.dpad_down && !buttonWasPressed) {
