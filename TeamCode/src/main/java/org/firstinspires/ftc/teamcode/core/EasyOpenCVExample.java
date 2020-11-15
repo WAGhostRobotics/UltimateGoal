@@ -19,9 +19,8 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.vision;
+package org.firstinspires.ftc.teamcode.core;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.opencv.core.Core;
@@ -36,17 +35,15 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-@Autonomous(name = "Scan for Rings", group = "Concept")
-public class EasyOpenCVExample extends LinearOpMode
-{
+//@Autonomous(name = "Scan for Rings", group = "Concept") // If want to use --> remove abstract (USE ORIGINAL)
+public abstract class EasyOpenCVExample extends LinearOpMode {
     OpenCvInternalCamera phoneCam;
-    SkystoneDeterminationPipeline pipeline;
+    static SkystoneDeterminationPipeline pipeline;
+    int cameraMonitorViewId;
 
-    @Override
-    public void runOpMode()
-    {
+    public void sensingInit() {
 
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
         pipeline = new SkystoneDeterminationPipeline();
         phoneCam.setPipeline(pipeline);
@@ -64,32 +61,17 @@ public class EasyOpenCVExample extends LinearOpMode
                 phoneCam.startStreaming(320,240, OpenCvCameraRotation.SIDEWAYS_LEFT);
             }
         });
-
-        waitForStart();
-
-        while (opModeIsActive())
-        {
-            telemetry.addData("Analysis", pipeline.getAnalysis());
-            telemetry.addData("Position", pipeline.position);
-            telemetry.update();
-
-            // Don't burn CPU cycles busy-looping in this sample
-            sleep(50);
-        }
     }
 
-    public static class SkystoneDeterminationPipeline extends OpenCvPipeline
-    {
-        /*
-         * An enum to define the skystone position
-         */
-        public enum RingPosition
-        {
-            FOUR,
-            ONE,
-            NONE
-        }
+    public RingPosition findPosition() {
+        telemetry.addData("Analysis", pipeline.getAnalysis());
+        telemetry.addData("Position", pipeline.getPosition());
+        telemetry.update();
 
+        return pipeline.getPosition();
+    }
+
+    public static class SkystoneDeterminationPipeline extends OpenCvPipeline {
         /*
          * Some color constants
          */
@@ -123,7 +105,7 @@ public class EasyOpenCVExample extends LinearOpMode
         int avg1;
 
         // Volatile since accessed by OpMode thread w/o synchronization
-        private volatile RingPosition position = RingPosition.FOUR;
+        protected volatile RingPosition position = RingPosition.FOUR;
 
         /*
          * This function takes the RGB frame, converts to YCrCb,
@@ -180,5 +162,17 @@ public class EasyOpenCVExample extends LinearOpMode
         {
             return avg1;
         }
+
+        public RingPosition getPosition() {return position;}
+    }
+
+    /*
+     * An enum to define the ring position
+     */
+    public enum RingPosition
+    {
+        FOUR,
+        ONE,
+        NONE
     }
 }
