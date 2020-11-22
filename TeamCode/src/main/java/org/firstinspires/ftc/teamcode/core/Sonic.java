@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.component.Intake;
+
 import java.util.ArrayList;
 // TODO: change name to whatever the programming kids want it to be
 public class Sonic {
@@ -15,6 +17,9 @@ public class Sonic {
     private static DcMotor dFrontRight;
     private static DcMotor dBackLeft;
     private static DcMotor dBackRight;
+
+    // Conveyor Belt
+    public static Intake intake;
 
     // Motor array [in order: lf, lr, rf, rr]
     public static ArrayList<DcMotor> driveMotors = new ArrayList<>();
@@ -34,10 +39,10 @@ public class Sonic {
         hardwareMap = hwMap;
 
         // Assign motor information
-        dFrontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        dFrontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        dBackLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        dBackRight = hardwareMap.get(DcMotor.class, "backRight");
+        dFrontLeft = hardwareMap.get(DcMotor.class, "lf");
+        dFrontRight = hardwareMap.get(DcMotor.class, "rf");
+        dBackLeft = hardwareMap.get(DcMotor.class, "lr");
+        dBackRight = hardwareMap.get(DcMotor.class, "rr");
 
         // Adjust motor directions - this decides which side of the robot is "front"
         // Flip the values to change the direction the robot "faces"
@@ -59,6 +64,10 @@ public class Sonic {
         driveMotors.add(dBackLeft);
         driveMotors.add(dFrontRight);
         driveMotors.add(dBackRight);
+
+        // Intake
+        intake = new Intake();
+        intake.init(hardwareMap);
 
         // Gyro
         imu = hardwareMap.get(BNO055IMU.class, "imu");
