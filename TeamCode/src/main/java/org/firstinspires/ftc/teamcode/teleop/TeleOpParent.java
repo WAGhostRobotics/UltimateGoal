@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.core.Sonic;
 import org.firstinspires.ftc.teamcode.library.DriveStyle;
@@ -50,49 +49,13 @@ public class TeleOpParent extends LinearOpMode {
             // Drivie using set drivemode (g1.ls/rs, g1.lb/rb)
             DriveStyle.driveWithType(Sonic.driveMotors, gamepad1, type);
 
-            // Winch control (g2.du/dd)
-            if (gamepad2.dpad_down && !buttonWasPressed) {
-                desiredPosition = Range.clip(desiredPosition - WINCH_INCREMENT, WINCH_MIN, WINCH_MAX);
-//                Kevin.linearSlides.setPosition(desiredPosition);
-                buttonWasPressed = true;
-            } else if (gamepad2.dpad_up && !buttonWasPressed) {
-                desiredPosition = Range.clip(desiredPosition + WINCH_INCREMENT, WINCH_MIN, WINCH_MAX);
-//                Kevin.linearSlides.setPosition(desiredPosition);
-                buttonWasPressed = true;
-            }
-
-            if (buttonWasPressed && !gamepad2.dpad_up && !gamepad2.dpad_down) {
-                buttonWasPressed = false;
-            }
-
-            // Extender control (g2.dl/dr)
-            if (gamepad2.dpad_right) {
-//                Kevin.extender.extend();
-            } else if (gamepad2.dpad_left) {
-//                Kevin.extender.retract();
-            }
-
-            // Claw grabbing (g2.x/a)
-            if (gamepad2.x) {
-//                Kevin.extender.closeClaw();
-            } else if (gamepad2.a) {
-//                Kevin.extender.openClaw();
-            }
-
-            // Intake (g2.b/y)
-            if (gamepad2.b) {
-//                Kevin.intake.in();
-            } else if (gamepad2.y) {
-//                Kevin.intake.out();
+            // Conveyor Belt on/off in/out
+            if (gamepad1.a) {
+                Sonic.intake.in();
+            } else if (gamepad1.b) {
+                Sonic.intake.out();
             } else {
-//                Kevin.intake.stop();
-            }
-
-            // Foundation (g1.lb/rb)
-            if (gamepad1.left_bumper) {
-//                Kevin.foundationGrabber.grab();
-            } else if (gamepad1.right_bumper) {
-//                Kevin.foundationGrabber.release();
+                Sonic.intake.stop();
             }
 
             // Send diagnostics to user

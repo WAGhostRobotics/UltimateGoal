@@ -1,14 +1,15 @@
 package org.firstinspires.ftc.teamcode.autonomous;
-// taccat3 was here
-import org.firstinspires.ftc.teamcode.core.CVLinearOpMode;
+
+import org.firstinspires.ftc.teamcode.core.EasyOpenCVExample;
 import org.firstinspires.ftc.teamcode.core.Sonic;
 import org.firstinspires.ftc.teamcode.library.DriveAuto;
 
-public class AutonomousParent extends CVLinearOpMode {
+public class AutonomousParent extends EasyOpenCVExample {
 
     // Environment variables for sub-classes (defaults to blue foundation)
     StartLocation startLocation = StartLocation.OUTSIDE;
     TeamColor teamColor = TeamColor.RED;
+    RingPosition position = RingPosition.ONE;
 
     private DriveAuto drivetrain = new DriveAuto(Sonic.driveMotors);
 
@@ -21,9 +22,8 @@ public class AutonomousParent extends CVLinearOpMode {
 
         Sonic.init(hardwareMap);
 
-        vuforiaInit();
-        vuforiaActivate();
-
+//        vuforiaInit();
+        sensingInit();
 
         // Send diagnostics to user
         telemetry.addData("Status", "Initialized");
@@ -32,8 +32,10 @@ public class AutonomousParent extends CVLinearOpMode {
         // waitForStart();
 
         while (!isStarted() && !isStopRequested()) {
-            vuforiaScan();
-            telemetry.addData("last location?: ", retrieveTranslation());
+//            vuforiaScan();
+            position = findPosition();
+//            telemetry.addData("last location?: ", retrieveTranslation());
+            telemetry.addData("Last Position: ", position);
         }
 
 //        vuforiaDeactivate();
@@ -42,6 +44,17 @@ public class AutonomousParent extends CVLinearOpMode {
             case INSIDE:
                 break;
             case OUTSIDE:
+                break;
+        }
+    }
+
+    public void dropWobbleGoal(RingPosition position) {
+        switch(position) {
+            case FOUR:
+                break;
+            case ONE:
+                break;
+            case NONE:
                 break;
         }
     }
