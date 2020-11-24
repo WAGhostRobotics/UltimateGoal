@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.component;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -26,9 +27,13 @@ public class Launcher {
         launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
         launcher2.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        launcherMotors.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        launcherMotors.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         launcherMotors = new MultiDcMotor(launcher1, launcher2);
 
         launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
     }
 
     public void reverse() {

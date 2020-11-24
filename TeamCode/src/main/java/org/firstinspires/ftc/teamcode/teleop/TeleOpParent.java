@@ -50,12 +50,21 @@ public class TeleOpParent extends LinearOpMode {
             DriveStyle.driveWithType(Kevin.driveMotors, gamepad1, type);
 
             // Conveyor Belt on/off in/out
-            if (gamepad1.a) {
+            if (gamepad1.a || gamepad2.a) {
                 Kevin.intake.out();
-            } else if (gamepad1.b) {
+            } else if (gamepad1.b || gamepad2.b) {
                 Kevin.intake.out();
             } else {
                 Kevin.intake.stop();
+            }
+
+            // Launcher
+            if (gamepad1.x || gamepad2.x) {
+                Kevin.launcher.top();
+            } else if (gamepad1.y || gamepad2.y) {
+                Kevin.launcher.power();
+            } else {
+                Kevin.launcher.stop();
             }
 
             // Send diagnostics to user
