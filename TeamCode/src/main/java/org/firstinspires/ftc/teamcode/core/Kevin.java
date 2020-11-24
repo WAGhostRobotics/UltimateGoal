@@ -6,10 +6,12 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.component.Intake;
+import org.firstinspires.ftc.teamcode.component.Claw;
+import org.firstinspires.ftc.teamcode.component.Launcher;
 
 import java.util.ArrayList;
-// TODO: change name to whatever the programming kids want it to be
-public class Sonic {
+
+public class Kevin {
     public static HardwareMap hardwareMap;
 
     // DriveStyle motors
@@ -18,8 +20,14 @@ public class Sonic {
     private static DcMotor dBackLeft;
     private static DcMotor dBackRight;
 
-    // Conveyor Belt
+    // Intake and Conveyor Belt
     public static Intake intake;
+
+    // Wobble Goal Claw
+    public static Claw claw;
+
+    // Launcher
+    public static Launcher launcher;
 
     // Motor array [in order: lf, lr, rf, rr]
     public static ArrayList<DcMotor> driveMotors = new ArrayList<>();
@@ -65,8 +73,15 @@ public class Sonic {
         driveMotors.add(dFrontRight);
         driveMotors.add(dBackRight);
 
-        // Intake
+        // Intake and Conveyor Belt
         intake = new Intake();
+
+        // Wobble Claw
+        claw = new Claw();
+
+        // Launcher
+        launcher = new Launcher();
+
         intake.init(hardwareMap);
 
         // Gyro

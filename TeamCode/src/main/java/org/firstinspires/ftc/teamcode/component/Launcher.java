@@ -6,12 +6,17 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.library.multimotors.MultiDcMotor;
 
-class Launcher {
+public class Launcher {
     // Intake
     private DcMotor launcher1;
     private DcMotor launcher2;
 
     private MultiDcMotor launcherMotors;
+
+    private final static double TOP = 0.9;
+    private final static double MIDDLE = 0.8;
+    private final static double BOTTOM = 0.7;
+    private final static double POWER = 1.0;
 
     public void init(HardwareMap hardwareMap) {
         // Init intake motors
@@ -26,12 +31,22 @@ class Launcher {
         launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
-    public void in() {
-        launcherMotors.setPower(1);
+    public void reverse() {
+        launcherMotors.setPower(-1);
     }
 
-    public void out() {
-        launcherMotors.setPower(-1);
+    public void top() { launcherMotors.setPower(TOP); }
+
+    public void middle() {
+        launcherMotors.setPower(MIDDLE);
+    }
+
+    public void bottom() {
+        launcherMotors.setPower(BOTTOM);
+    }
+
+    public void power() {
+        launcherMotors.setPower(POWER);
     }
 
     public void stop() {

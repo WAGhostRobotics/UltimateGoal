@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.autonomous;
-// taccat was here
+
 import org.firstinspires.ftc.teamcode.core.EasyOpenCVExample;
-import org.firstinspires.ftc.teamcode.core.Sonic;
+import org.firstinspires.ftc.teamcode.core.Kevin;
 import org.firstinspires.ftc.teamcode.library.DriveAuto;
 
 public class AutonomousParent extends EasyOpenCVExample {
@@ -11,7 +11,7 @@ public class AutonomousParent extends EasyOpenCVExample {
     TeamColor teamColor = TeamColor.RED;
     RingPosition position = RingPosition.ONE;
 
-    private DriveAuto drivetrain = new DriveAuto(Sonic.driveMotors);
+    private DriveAuto drivetrain = new DriveAuto(Kevin.driveMotors);
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -20,7 +20,7 @@ public class AutonomousParent extends EasyOpenCVExample {
         telemetry.addData("Status", "Initializing...");
         telemetry.update();
 
-        Sonic.init(hardwareMap);
+        Kevin.init(hardwareMap);
 
 //        vuforiaInit();
         sensingInit();

@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.core.Sonic;
+import org.firstinspires.ftc.teamcode.core.Kevin;
 import org.firstinspires.ftc.teamcode.library.DriveStyle;
 
 public class TeleOpParent extends LinearOpMode {
@@ -29,7 +29,7 @@ public class TeleOpParent extends LinearOpMode {
         telemetry.update();
 
         // Initialize the robot hardware
-        Sonic.init(hardwareMap);
+        Kevin.init(hardwareMap);
 
         // Send diagnostics to user
         telemetry.addData("Status", "Initialized");
@@ -47,15 +47,15 @@ public class TeleOpParent extends LinearOpMode {
             */
 
             // Drivie using set drivemode (g1.ls/rs, g1.lb/rb)
-            DriveStyle.driveWithType(Sonic.driveMotors, gamepad1, type);
+            DriveStyle.driveWithType(Kevin.driveMotors, gamepad1, type);
 
             // Conveyor Belt on/off in/out
             if (gamepad1.a) {
-                Sonic.intake.in();
+                Kevin.intake.out();
             } else if (gamepad1.b) {
-                Sonic.intake.out();
+                Kevin.intake.out();
             } else {
-                Sonic.intake.stop();
+                Kevin.intake.stop();
             }
 
             // Send diagnostics to user
