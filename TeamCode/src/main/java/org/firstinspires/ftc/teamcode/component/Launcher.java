@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.component;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -11,7 +12,7 @@ public class Launcher {
     // Intake
     private DcMotor launcher1;
     private DcMotor launcher2;
-
+    private CRServo mover;
     private MultiDcMotor launcherMotors;
 
     private final static double TOP = 0.9;
@@ -23,6 +24,8 @@ public class Launcher {
         // Init intake motors
         launcher1 = hardwareMap.get(DcMotor.class, "l1");
         launcher2 = hardwareMap.get(DcMotor.class, "l2");
+        mover = hardwareMap.get(CRServo.class, "m");
+
 
         launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
         launcher2.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -36,8 +39,7 @@ public class Launcher {
 
     }
 
-    public void reverse() {
-        launcherMotors.setPower(-1);
+    public void reverse() { launcherMotors.setPower(-1);
     }
 
     public void top() { launcherMotors.setPower(TOP); }
@@ -57,4 +59,7 @@ public class Launcher {
     public void stop() {
         launcherMotors.setPower(0);
     }
+
+
 }
+
