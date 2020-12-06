@@ -66,12 +66,12 @@ public class Kevin {
         dBackLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         dBackRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        // THIS MAY OR MAY NOT WORK
-        // set to use encoders (can use for specific speed or distance)
-        dFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        dFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        dBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        dBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        // THIS MAY OR MAY NOT WORK
+//        // set to use encoders (can use for specific speed or distance)
+//        dFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        dFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        dBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        dBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Adds the motors to a motor array for easier reference
         // The order here must match the order used in {@link DriveStyle}
