@@ -65,6 +65,10 @@ public class TeleOpParent extends LinearOpMode {
                 Kevin.launcher.middle();
             }
 
+            if(gamepad1.dpad_up) {
+                Kevin.launcher.positioning(0);
+            }
+
             telemetry.addData("Positioning: ", Kevin.launcher.getPosition());
             telemetry.update();
 
