@@ -16,9 +16,6 @@ public class Launcher {
     private CRServo mover;
     private MultiDcMotor launcherMotors;
 
-    private final static double TOP = 0.9;
-    private final static double MIDDLE = 0.8;
-    private final static double BOTTOM = 0.7;
     private final static double POWER = 1.0;
     private final static int TIME = 500;
 
@@ -38,30 +35,8 @@ public class Launcher {
         launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
-    public void reverse() {
-        launcherMotors.setPower(1.0);
-        Kevin.sleep(1000);
-        mover.setPower(1);
-        Kevin.sleep(TIME);
-        mover.setPower(-1);
-        Kevin.sleep(TIME);
-        mover.setPower(0);
-        launcherMotors.setPower(0);
-    }
-
-    public void top() {
-        launcherMotors.setPower(0.9);
-        Kevin.sleep(1000);
-        mover.setPower(1);
-        Kevin.sleep(TIME);
-        mover.setPower(-1);
-        Kevin.sleep(TIME);
-        mover.setPower(0);
-        launcherMotors.setPower(0);
-    }
-
-    public void middle() {
-        launcherMotors.setPower(0.8);
+    public void power(double power) {
+        launcherMotors.setPower(power);
         Kevin.sleep(1000);
         mover.setPower(1);
         Kevin.sleep(TIME);

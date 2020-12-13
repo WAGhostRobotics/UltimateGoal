@@ -60,9 +60,9 @@ public class TeleOpParent extends LinearOpMode {
 
             // Launcher
             if (gamepad1.x || gamepad2.x) {
-                Kevin.launcher.top();
+                Kevin.launcher.power(0.9);
             } else if (gamepad1.y || gamepad2.y) {
-                Kevin.launcher.middle();
+                Kevin.launcher.power(0.8);
             }
 
             // Send diagnostics to user
