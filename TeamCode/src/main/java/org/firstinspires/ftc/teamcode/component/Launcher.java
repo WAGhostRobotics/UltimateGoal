@@ -43,7 +43,7 @@ public class Launcher {
     public void reverse() {
         launcherMotors.setPower(1.0);
         Kevin.sleep(1000);
-        mover.setPosition(POSITION + 0.1);
+        mover.setPosition(POSITION - 0.1);
         Kevin.sleep(100);
         mover.setPosition(POSITION);
         launcherMotors.setPower(0);
@@ -52,7 +52,7 @@ public class Launcher {
     public void top() {
         launcherMotors.setPower(0.9);
         Kevin.sleep(1000);
-        mover.setPosition(POSITION + 0.1);
+        mover.setPosition(POSITION - 0.1);
         Kevin.sleep(100);
         mover.setPosition(POSITION);
         launcherMotors.setPower(0);
@@ -61,7 +61,7 @@ public class Launcher {
     public void middle() {
         launcherMotors.setPower(0.8);
         Kevin.sleep(1000);
-        mover.setPosition(POSITION + 0.1);
+        mover.setPosition(POSITION - 0.1);
         Kevin.sleep(100);
         mover.setPosition(POSITION);
         launcherMotors.setPower(0);
@@ -71,7 +71,7 @@ public class Launcher {
         launcherMotors.setPower(0.7);
         Kevin.sleep(1000);
         double position = mover.getPosition();
-        mover.setPosition(position + 0.1);
+        mover.setPosition(position - 0.1);
         Kevin.sleep(100);
         launcherMotors.setPower(0);
     }
