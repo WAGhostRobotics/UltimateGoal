@@ -9,6 +9,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.core.Kevin;
 import org.firstinspires.ftc.teamcode.library.multimotors.MultiDcMotor;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 
 public class Launcher {
     // Launcher
@@ -21,6 +23,7 @@ public class Launcher {
     private final static double MIDDLE = 0.8;
     private final static double BOTTOM = 0.7;
     private final static double POWER = 1.0;
+    private static double position;
 
     public void init(HardwareMap hardwareMap) {
         // Init intake motors
@@ -36,6 +39,8 @@ public class Launcher {
 
         launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
+        position = mover.getPosition();
+        telemetry.addData("servo position", position);
     }
 
     public void reverse() {
@@ -83,6 +88,8 @@ public class Launcher {
         launcherMotors.setPower(0);
     }
 
-
+    public double getPosition() {
+        return mover.getPosition();
+    }
 }
 
