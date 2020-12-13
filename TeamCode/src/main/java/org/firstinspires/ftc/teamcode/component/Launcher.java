@@ -17,7 +17,7 @@ public class Launcher {
     private MultiDcMotor launcherMotors;
 
     private final static double POWER = 1.0;
-    private final static int TIME = 500;
+    private final static int TIME = 2000;
 
 
     public void init(HardwareMap hardwareMap) {
