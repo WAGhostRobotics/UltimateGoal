@@ -42,9 +42,6 @@ public class Launcher {
     }
 
     public void reverse() {
-        if(true) {
-            throw new IllegalArgumentException("GOSH DARN IT WORK");
-        }
         launcherMotors.setPower(-1);
         Kevin.sleep(1000);
         double position = mover.getPosition();
@@ -54,6 +51,9 @@ public class Launcher {
     }
 
     public void top() {
+        if(true) {
+            throw new IllegalArgumentException("GOSH DARN IT WORK");
+        }
         launcher1.setPower(0.9);
         launcher2.setPower(0.9);
         Kevin.sleep(1000);
@@ -64,6 +64,9 @@ public class Launcher {
     }
 
     public void middle() {
+        if(true) {
+            throw new IllegalArgumentException("GOSH DARN IT WORK");
+        }
         launcher1.setPower(0.8);
         launcher2.setPower(0.8);
         Kevin.sleep(1000);
