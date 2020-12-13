@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.core.Kevin;
 import org.firstinspires.ftc.teamcode.library.multimotors.MultiDcMotor;
@@ -13,7 +14,7 @@ public class Launcher {
     // Intake
     private DcMotor launcher1;
     private DcMotor launcher2;
-    private CRServo mover;
+    private Servo mover;
     private MultiDcMotor launcherMotors;
 
     private final static double TOP = 0.9;
@@ -25,7 +26,7 @@ public class Launcher {
         // Init intake motors
         launcher1 = hardwareMap.get(DcMotor.class, "l1");
         launcher2 = hardwareMap.get(DcMotor.class, "l2");
-        mover = hardwareMap.get(CRServo.class, "m");
+        mover = hardwareMap.get(Servo.class, "m");
 
 
         launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -43,9 +44,9 @@ public class Launcher {
     public void reverse() {
         launcherMotors.setPower(-1);
         Kevin.sleep(1000);
-        mover.setPower(1);
+        double position = mover.getPosition();
+        mover.setPosition(position + 0.1);
         Kevin.sleep(100);
-        mover.setPower(0);
         launcherMotors.setPower(0);
     }
 
@@ -53,9 +54,9 @@ public class Launcher {
         launcher1.setPower(0.9);
         launcher2.setPower(0.9);
         Kevin.sleep(1000);
-        mover.setPower(1);
+        double position = mover.getPosition();
+        mover.setPosition(position + 0.1);
         Kevin.sleep(100);
-        mover.setPower(0);
         launcherMotors.setPower(0);
     }
 
@@ -63,18 +64,18 @@ public class Launcher {
         launcher1.setPower(0.8);
         launcher2.setPower(0.8);
         Kevin.sleep(1000);
-        mover.setPower(1);
+        double position = mover.getPosition();
+        mover.setPosition(position + 0.1);
         Kevin.sleep(100);
-        mover.setPower(0);
         launcherMotors.setPower(0);
     }
 
     public void bottom() {
         launcherMotors.setPower(0.7);
         Kevin.sleep(1000);
-        mover.setPower(1);
+        double position = mover.getPosition();
+        mover.setPosition(position + 0.1);
         Kevin.sleep(100);
-        mover.setPower(0);
         launcherMotors.setPower(0);
     }
 
