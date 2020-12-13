@@ -17,7 +17,7 @@ public class Launcher {
     private MultiDcMotor launcherMotors;
 
     private final static double POWER = 1.0;
-    private final static int TIME = 500;
+    private final static int TIME = 1000;
 
 
     public void init(HardwareMap hardwareMap) {
@@ -37,7 +37,7 @@ public class Launcher {
 
     public void power(double power) {
         launcherMotors.setPower(power);
-        Kevin.sleep(1000);
+        Kevin.sleep(500);
         mover.setPower(1);
         Kevin.sleep(TIME);
         mover.setPower(-1);
