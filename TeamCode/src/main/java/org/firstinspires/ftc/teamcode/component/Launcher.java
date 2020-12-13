@@ -23,7 +23,7 @@ public class Launcher {
     private final static double MIDDLE = 0.8;
     private final static double BOTTOM = 0.7;
     private final static double POWER = 1.0;
-    private static double position;
+    private final static double POSITION = 0.8;
 
     public void init(HardwareMap hardwareMap) {
         // Init intake motors
@@ -41,30 +41,29 @@ public class Launcher {
     }
 
     public void reverse() {
-        launcherMotors.setPower(-1);
+        launcherMotors.setPower(1.0);
         Kevin.sleep(1000);
-        double position = mover.getPosition();
-        mover.setPosition(position + 0.1);
+        mover.setPosition(POSITION + 0.1);
         Kevin.sleep(100);
+        mover.setPosition(POSITION);
         launcherMotors.setPower(0);
     }
 
     public void top() {
         launcherMotors.setPower(0.9);
         Kevin.sleep(1000);
-        position = mover.getPosition();
-        mover.setPosition(position + 0.1);
+        mover.setPosition(POSITION + 0.1);
         Kevin.sleep(100);
+        mover.setPosition(POSITION);
         launcherMotors.setPower(0);
     }
 
     public void middle() {
         launcherMotors.setPower(0.8);
         Kevin.sleep(1000);
-        position = mover.getPosition();
-        mover.setPosition(position + 0.1);
+        mover.setPosition(POSITION + 0.1);
         Kevin.sleep(100);
-        mover.setPosition(position);
+        mover.setPosition(POSITION);
         launcherMotors.setPower(0);
     }
 
