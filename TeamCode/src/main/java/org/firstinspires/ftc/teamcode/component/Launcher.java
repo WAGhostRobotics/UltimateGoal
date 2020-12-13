@@ -53,7 +53,7 @@ public class Launcher {
         launcherMotors.setPower(0.9);
         Kevin.sleep(1000);
         mover.setPosition(0.0);
-        Kevin.sleep(100);
+        Kevin.sleep(1000);
         mover.setPosition(POSITION);
         launcherMotors.setPower(0);
     }
@@ -62,7 +62,7 @@ public class Launcher {
         launcherMotors.setPower(0.8);
         Kevin.sleep(1000);
         mover.setPosition(0.0);
-        Kevin.sleep(100);
+        Kevin.sleep(1000);
         mover.setPosition(POSITION);
         launcherMotors.setPower(0);
     }
