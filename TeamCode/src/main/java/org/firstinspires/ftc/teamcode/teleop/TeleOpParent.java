@@ -66,15 +66,7 @@ public class TeleOpParent extends LinearOpMode {
             }
 
             if (gamepad1.dpad_up) {
-                double position = Kevin.launcher.positioning();
-                int x = 0;
-                while(Kevin.launcher.getPosition() != position) {
-                    sleep(1000);
-                    x += 1;
-                    if (x >= 3) {
-                        break;
-                    }
-                }
+                Kevin.launcher.positioning();
             }
 
             // Send diagnostics to user

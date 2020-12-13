@@ -89,9 +89,8 @@ public class Launcher {
         return mover.getPosition();
     }
 
-    public double positioning() {
-        mover.setPosition(position - 0.1);
-        return position - 0.1;
+    public void positioning() {
+        telemetry.addData("Position: ", mover.getPosition());
     }
 }
 
