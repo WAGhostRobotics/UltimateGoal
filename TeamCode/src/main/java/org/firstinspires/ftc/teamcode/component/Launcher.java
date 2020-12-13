@@ -38,9 +38,6 @@ public class Launcher {
         launcherMotors = new MultiDcMotor(launcher1, launcher2);
 
         launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-
-        position = mover.getPosition();
-        telemetry.addData("servo position: ", getPosition());
     }
 
     public void reverse() {
@@ -55,7 +52,7 @@ public class Launcher {
     public void top() {
         launcherMotors.setPower(0.9);
         Kevin.sleep(1000);
-        double position = mover.getPosition();
+        position = mover.getPosition();
         mover.setPosition(position + 0.1);
         Kevin.sleep(100);
         launcherMotors.setPower(0);
@@ -64,7 +61,7 @@ public class Launcher {
     public void middle() {
         launcherMotors.setPower(0.8);
         Kevin.sleep(1000);
-        double position = mover.getPosition();
+        position = mover.getPosition();
         mover.setPosition(position + 0.1);
         Kevin.sleep(100);
         mover.setPosition(position);
@@ -90,6 +87,11 @@ public class Launcher {
 
     public double getPosition() {
         return mover.getPosition();
+    }
+
+    public double positioning() {
+        mover.setPosition(position - 0.1);
+        return position - 0.1;
     }
 }
 
