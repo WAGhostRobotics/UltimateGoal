@@ -51,7 +51,7 @@ public class TeleOpParent extends LinearOpMode {
 
             // Conveyor Belt on/off in/out
             if (gamepad1.a || gamepad2.a) {
-                Kevin.intake.out();
+                Kevin.intake.in();
             } else if (gamepad1.b || gamepad2.b) {
                 Kevin.intake.out();
             } else {

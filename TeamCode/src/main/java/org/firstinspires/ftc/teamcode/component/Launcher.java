@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.library.multimotors.MultiDcMotor;
 
 
 public class Launcher {
-    // Intake
+    // Launcher
     private DcMotor launcher1;
     private DcMotor launcher2;
     private Servo mover;
@@ -32,9 +32,6 @@ public class Launcher {
         launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
         launcher2.setDirection(DcMotorSimple.Direction.REVERSE);
 
-//        launcherMotors.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        launcherMotors.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
         launcherMotors = new MultiDcMotor(launcher1, launcher2);
 
         launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -52,9 +49,6 @@ public class Launcher {
 
     public void top() {
         launcherMotors.setPower(0.9);
-        if(true) {
-            throw new IllegalArgumentException("GOSH DARN IT WORK");
-        }
         Kevin.sleep(1000);
         double position = mover.getPosition();
         mover.setPosition(position + 0.1);

@@ -12,7 +12,7 @@ public class Intake {
     public void init(HardwareMap hardwareMap) {
         // Init intake motors
         intake = hardwareMap.get(DcMotor.class, "in");
-        intake.setDirection(DcMotorSimple.Direction.REVERSE);
+        intake.setDirection(DcMotorSimple.Direction.FORWARD);
         intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         belt = hardwareMap.get(DcMotor.class, "cn");
         belt.setDirection(DcMotorSimple.Direction.REVERSE);
