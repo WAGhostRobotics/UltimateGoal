@@ -40,7 +40,7 @@ public class Launcher {
         launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         position = mover.getPosition();
-        telemetry.addData("servo position: ", mover.getPosition());
+        telemetry.addData("servo position: ", getPosition());
     }
 
     public void reverse() {
