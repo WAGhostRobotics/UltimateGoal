@@ -51,11 +51,10 @@ public class Launcher {
     }
 
     public void top() {
+        launcherMotors.setPower(0.9);
         if(true) {
             throw new IllegalArgumentException("GOSH DARN IT WORK");
         }
-        launcher1.setPower(0.9);
-        launcher2.setPower(0.9);
         Kevin.sleep(1000);
         double position = mover.getPosition();
         mover.setPosition(position + 0.1);
@@ -64,11 +63,7 @@ public class Launcher {
     }
 
     public void middle() {
-        if(true) {
-            throw new IllegalArgumentException("GOSH DARN IT WORK");
-        }
-        launcher1.setPower(0.8);
-        launcher2.setPower(0.8);
+        launcherMotors.setPower(0.8);
         Kevin.sleep(1000);
         double position = mover.getPosition();
         mover.setPosition(position + 0.1);
