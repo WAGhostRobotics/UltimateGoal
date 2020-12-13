@@ -32,15 +32,15 @@ public class Launcher {
         mover = hardwareMap.get(Servo.class, "m");
 
 
-        launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
-        launcher2.setDirection(DcMotorSimple.Direction.REVERSE);
+        launcher1.setDirection(DcMotorSimple.Direction.REVERSE);
+        launcher2.setDirection(DcMotorSimple.Direction.FORWARD);
 
         launcherMotors = new MultiDcMotor(launcher1, launcher2);
 
         launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         position = mover.getPosition();
-        telemetry.addData("servo position", position);
+        telemetry.addData("servo position: ", mover.getPosition());
     }
 
     public void reverse() {
