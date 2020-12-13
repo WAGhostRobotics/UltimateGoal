@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.component;
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -8,8 +7,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.core.Kevin;
 import org.firstinspires.ftc.teamcode.library.multimotors.MultiDcMotor;
-
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 
 public class Launcher {
@@ -23,8 +20,8 @@ public class Launcher {
     private final static double MIDDLE = 0.8;
     private final static double BOTTOM = 0.7;
     private final static double POWER = 1.0;
-    private final static double PTOP = 1.0;
-    private final static double PBOTTOM = 0.0;
+    private final static double PTOP = 0.0;
+    private final static double PBOTTOM = 1.0;
 
     public void init(HardwareMap hardwareMap) {
         // Init intake motors
