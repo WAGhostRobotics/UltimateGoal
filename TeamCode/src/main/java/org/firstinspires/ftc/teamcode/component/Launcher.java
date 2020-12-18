@@ -35,9 +35,24 @@ public class Launcher {
         launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
+//    public void power(double power) {
+//        launcherMotors.setPower(power);
+//        Kevin.sleep(500);
+//        mover.setPower(1);
+//        Kevin.sleep(TIME);
+//        mover.setPower(0.0);
+//        Kevin.sleep(100);
+//        mover.setPower(-1);
+//        Kevin.sleep(TIME);
+//        mover.setPower(0);
+//        launcherMotors.setPower(0);
+//    }
+
     public void power(double power) {
         launcherMotors.setPower(power);
-        Kevin.sleep(500);
+    }
+
+    public void shoot() {
         mover.setPower(1);
         Kevin.sleep(TIME);
         mover.setPower(0.0);
@@ -45,7 +60,6 @@ public class Launcher {
         mover.setPower(-1);
         Kevin.sleep(TIME);
         mover.setPower(0);
-        launcherMotors.setPower(0);
     }
 
     public void stop() {

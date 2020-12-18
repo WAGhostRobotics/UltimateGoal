@@ -59,10 +59,17 @@ public class TeleOpParent extends LinearOpMode {
             }
 
             // Launcher
-            if (gamepad1.x || gamepad2.x) {
-                Kevin.launcher.power(0.9);
-            } else if (gamepad1.y || gamepad2.y) {
+            // Launcher Wheels
+            if (gamepad1.dpad_up || gamepad2.dpad_up) { // top power
+                Kevin.launcher.power(1);
+            } else if (gamepad1.dpad_down || gamepad2.dpad_down) { // middle power
                 Kevin.launcher.power(0.8);
+            } else {
+                Kevin.launcher.power(0.0);
+            }
+            // Launcher Mover
+            if(gamepad1.y || gamepad2.y) {
+                Kevin.launcher.shoot();
             }
 
             // Send diagnostics to user
