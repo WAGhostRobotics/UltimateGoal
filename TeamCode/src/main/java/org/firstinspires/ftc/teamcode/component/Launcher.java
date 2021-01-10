@@ -18,6 +18,7 @@ public class Launcher {
 
     private final static double POWER = 1.0;
     private final static int TIME = 1000;
+    private final static int TIME2 = 2000;
 
 
     public void init(HardwareMap hardwareMap) {
@@ -27,8 +28,9 @@ public class Launcher {
         mover = hardwareMap.get(CRServo.class, "m");
 
 
-        launcher1.setDirection(DcMotorSimple.Direction.REVERSE);
-        launcher2.setDirection(DcMotorSimple.Direction.FORWARD);
+        launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
+        launcher2.setDirection(DcMotorSimple.Direction.REVERSE);
+        mover.setDirection(DcMotorSimple.Direction.REVERSE);
 
         launcherMotors = new MultiDcMotor(launcher1, launcher2);
 
@@ -54,12 +56,14 @@ public class Launcher {
 
     public void shoot() {
         mover.setPower(1);
-        Kevin.sleep(TIME);
+        Kevin.sleep(TIME2);
         mover.setPower(0.0);
-        Kevin.sleep(100);
         mover.setPower(-1);
-        Kevin.sleep(TIME);
+        Kevin.sleep(TIME2);
         mover.setPower(0);
+        Kevin.intake.in();
+        Kevin.sleep(100);
+        Kevin.intake.stop();
     }
 
     public void stop() {

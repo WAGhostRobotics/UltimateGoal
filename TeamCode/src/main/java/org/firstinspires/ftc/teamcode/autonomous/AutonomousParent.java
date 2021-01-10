@@ -32,31 +32,41 @@ public class AutonomousParent extends EasyOpenCVExample {
         // waitForStart();
 
         while (!isStarted() && !isStopRequested()) {
-//            vuforiaScan();
+            Kevin.claw.grab();
             position = findPosition();
 //            telemetry.addData("last location?: ", retrieveTranslation());
             telemetry.addData("Last Position: ", position);
         }
 
-//        vuforiaDeactivate();
-
         switch (startLocation) {
             case INSIDE:
                 break;
             case OUTSIDE:
+                dropWobbleGoal();
                 break;
         }
     }
 
-    public void dropWobbleGoal(RingPosition position) {
+    public void dropWobbleGoal() {
+        drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, 1.5);
+
         switch(position) {
-            case FOUR:
+            case FOUR: // C
+                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 5);
                 break;
-            case ONE:
+            case ONE: // B
+                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 3);
+                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 1.5);
                 break;
-            case NONE:
+            case NONE: // A
+                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 1.5);
                 break;
         }
+        Kevin.claw.release();
+    }
+
+    public void moveToShootingPos() {
+
     }
 
     enum StartLocation {

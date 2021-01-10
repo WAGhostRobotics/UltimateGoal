@@ -63,7 +63,7 @@ public class TeleOpParent extends LinearOpMode {
             if (gamepad1.dpad_up || gamepad2.dpad_up) { // top power
                 Kevin.launcher.power(1);
             } else if (gamepad1.dpad_down || gamepad2.dpad_down) { // middle power
-                Kevin.launcher.power(0.8);
+                Kevin.launcher.power(0.9);
             } else {
                 Kevin.launcher.power(0.0);
             }
