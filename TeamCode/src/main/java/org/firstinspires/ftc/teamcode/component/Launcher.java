@@ -66,6 +66,10 @@ public class Launcher {
         Kevin.intake.stop();
     }
 
+    public void shoot(int power) {
+        mover.setPower(power);
+    }
+
     public void stop() {
         launcherMotors.setPower(0);
     }

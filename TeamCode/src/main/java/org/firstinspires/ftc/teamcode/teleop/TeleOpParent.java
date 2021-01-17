@@ -18,6 +18,11 @@ public class TeleOpParent extends LinearOpMode {
 
     private static double WINCH_INCREMENT = 0.05;
 
+    // Launcher mover variables
+    private boolean hasRun = true;
+    private long setTime = 0;
+    private boolean forward = false;
+
     // Set default DriveType
     DriveStyle.DriveType type = DriveStyle.DriveType.MECANUMARCADE;
 
@@ -68,8 +73,25 @@ public class TeleOpParent extends LinearOpMode {
                 Kevin.launcher.power(0.0);
             }
             // Launcher Mover
+
             if(gamepad1.y || gamepad2.y) {
-                Kevin.launcher.shoot();
+                setTime = System.currentTimeMillis();
+                hasRun = false;
+                forward = false;
+
+                Kevin.launcher.shoot(1);
+            }
+
+            if(!hasRun && System.currentTimeMillis() - setTime > 2000) {
+                setTime = System.currentTimeMillis();
+                Kevin.launcher.shoot(-1);
+                forward = true;
+            }
+
+            if(forward && !hasRun && System.currentTimeMillis() - setTime > 2000) {
+                setTime = System.currentTimeMillis();
+                Kevin.launcher.shoot(0);
+                hasRun = true;
             }
 
             // Send diagnostics to user

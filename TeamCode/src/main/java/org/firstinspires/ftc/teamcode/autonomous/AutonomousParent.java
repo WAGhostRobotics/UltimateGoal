@@ -32,7 +32,7 @@ public class AutonomousParent extends EasyOpenCVExample {
         // waitForStart();
 
         while (!isStarted() && !isStopRequested()) {
-            Kevin.claw.grab();
+//            Kevin.claw.grab();
             position = findPosition();
 //            telemetry.addData("last location?: ", retrieveTranslation());
             telemetry.addData("Last Position: ", position);
