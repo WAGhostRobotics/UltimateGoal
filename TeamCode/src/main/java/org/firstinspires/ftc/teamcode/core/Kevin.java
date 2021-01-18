@@ -91,6 +91,7 @@ public class Kevin {
 
         intake.init(hardwareMap);
         launcher.init(hardwareMap);
+        claw.init(hardwareMap);
 
         // Gyro
         imu = hardwareMap.get(BNO055IMU.class, "imu");

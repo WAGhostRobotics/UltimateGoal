@@ -54,6 +54,9 @@ public class TeleOpParent extends LinearOpMode {
             // Drivie using set drivemode (g1.ls/rs, g1.lb/rb)
             DriveStyle.driveWithType(Kevin.driveMotors, gamepad1, type);
 
+            // Wobble Goal Claw
+
+
             // Conveyor Belt on/off in/out
             if (gamepad1.a || gamepad2.a) {
                 Kevin.intake.in();
@@ -80,6 +83,22 @@ public class TeleOpParent extends LinearOpMode {
                 forward = false;
 
                 Kevin.launcher.shoot(1);
+            }
+
+            if(gamepad1.left_bumper||gamepad2.left_bumper){
+                Kevin.claw.grab();
+            }
+
+            if(gamepad1.right_bumper||gamepad2.right_bumper){
+                Kevin.claw.release();
+            }
+
+            if(gamepad1.dpad_left||gamepad2.dpad_left){
+                Kevin.claw.up();
+            }
+
+            if(gamepad1.dpad_right|| gamepad2.dpad_right){
+                Kevin.claw.down();
             }
 
             if(!hasRun && System.currentTimeMillis() - setTime > 2000) {

@@ -33,10 +33,15 @@ public class AutonomousParent extends EasyOpenCVExample {
 
         while (!isStarted() && !isStopRequested()) {
 //            Kevin.claw.grab();
+            Kevin.claw.release();
             position = findPosition();
 //            telemetry.addData("last location?: ", retrieveTranslation());
             telemetry.addData("Last Position: ", position);
         }
+
+//        ExtendWobbleClaw();
+        Kevin.claw.grab();
+        sleep(4000);
 
         switch (startLocation) {
             case INSIDE:
@@ -45,21 +50,30 @@ public class AutonomousParent extends EasyOpenCVExample {
                 dropWobbleGoal();
                 break;
         }
+
+        RetractWobbleClaw();
     }
 
     public void dropWobbleGoal() {
-        drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, 1.5);
-
+        if (teamColor == TeamColor.BLUE) {
+            drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, .75);
+        } else {
+            drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, .75);
+        }
         switch(position) {
             case FOUR: // C
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 5);
+                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 6);
                 break;
             case ONE: // B
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 3);
-                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 1.5);
+                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 3);
+                if (teamColor == TeamColor.BLUE) {
+                    drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 1.5);
+                } else {
+                    drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, 1.5);
+                }
                 break;
             case NONE: // A
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 1.5);
+                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 5);
                 break;
         }
         Kevin.claw.release();
@@ -67,6 +81,22 @@ public class AutonomousParent extends EasyOpenCVExample {
 
     public void moveToShootingPos() {
 
+    }
+
+    public void ExtendWobbleClaw() {
+//        Kevin.claw.grab();
+//        sleep(100);
+//        Kevin.claw.down();
+        Kevin.claw.down();
+        sleep(5000);
+        Kevin.claw.grab();
+        sleep(2000);
+    }
+
+    public void RetractWobbleClaw() {
+        Kevin.claw.down();
+        sleep(3000);
+        Kevin.claw.release();
     }
 
     enum StartLocation {
