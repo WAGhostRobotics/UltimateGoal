@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.CRServo;
 
-import org.firstinspires.ftc.teamcode.core.Kevin;
+import org.firstinspires.ftc.teamcode.core.Mary;
 import org.firstinspires.ftc.teamcode.library.multimotors.MultiDcMotor;
 
 
@@ -56,14 +56,14 @@ public class Launcher {
 
     public void shoot() {
         mover.setPower(1);
-        Kevin.sleep(TIME2);
+        Mary.sleep(TIME2);
         mover.setPower(0.0);
         mover.setPower(-1);
-        Kevin.sleep(TIME2);
+        Mary.sleep(TIME2);
         mover.setPower(0);
-        Kevin.intake.in();
-        Kevin.sleep(100);
-        Kevin.intake.stop();
+        Mary.intake.in();
+        Mary.sleep(100);
+        Mary.intake.stop();
     }
 
     public void shoot(int power) {
@@ -72,6 +72,10 @@ public class Launcher {
 
     public void stop() {
         launcherMotors.setPower(0);
+    }
+
+    public void mover(double power) {
+        mover.setPower(power);
     }
 
 }

@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.component.Launcher;
 
 import java.util.ArrayList;
 
-public class Kevin {
+public class Mary {
     public static HardwareMap hardwareMap;
 
     // DriveStyle motors
@@ -68,10 +68,10 @@ public class Kevin {
 
 //        // THIS MAY OR MAY NOT WORK
 //        // set to use encoders (can use for specific speed or distance)
-//        dFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        dFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        dBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        dBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        dFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        dFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        dBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        dBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Adds the motors to a motor array for easier reference
         // The order here must match the order used in {@link DriveStyle}

@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.core.Kevin;
+import org.firstinspires.ftc.teamcode.core.Mary;
 import org.firstinspires.ftc.teamcode.library.DriveStyle;
 
 public class TeleOpParent extends LinearOpMode {
@@ -34,7 +34,7 @@ public class TeleOpParent extends LinearOpMode {
         telemetry.update();
 
         // Initialize the robot hardware
-        Kevin.init(hardwareMap);
+        Mary.init(hardwareMap);
 
         // Send diagnostics to user
         telemetry.addData("Status", "Initialized");
@@ -52,28 +52,28 @@ public class TeleOpParent extends LinearOpMode {
             */
 
             // Drivie using set drivemode (g1.ls/rs, g1.lb/rb)
-            DriveStyle.driveWithType(Kevin.driveMotors, gamepad1, type);
+            DriveStyle.driveWithType(Mary.driveMotors, gamepad1, type);
 
             // Wobble Goal Claw
 
 
             // Conveyor Belt on/off in/out
             if (gamepad1.a || gamepad2.a) {
-                Kevin.intake.in();
+                Mary.intake.in();
             } else if (gamepad1.b || gamepad2.b) {
-                Kevin.intake.out();
+                Mary.intake.out();
             } else {
-                Kevin.intake.stop();
+                Mary.intake.stop();
             }
 
             // Launcher
             // Launcher Wheels
             if (gamepad1.dpad_up || gamepad2.dpad_up) { // top power
-                Kevin.launcher.power(1);
+                Mary.launcher.power(1);
             } else if (gamepad1.dpad_down || gamepad2.dpad_down) { // middle power
-                Kevin.launcher.power(0.9);
+                Mary.launcher.power(0.9);
             } else {
-                Kevin.launcher.power(0.0);
+                Mary.launcher.power(0.0);
             }
             // Launcher Mover
 
@@ -82,34 +82,39 @@ public class TeleOpParent extends LinearOpMode {
                 hasRun = false;
                 forward = false;
 
-                Kevin.launcher.shoot(1);
+                Mary.launcher.shoot(1);
             }
 
+            // Wobble Claw
             if(gamepad1.left_bumper||gamepad2.left_bumper){
-                Kevin.claw.grab();
+                Mary.claw.grab();
             }
 
             if(gamepad1.right_bumper||gamepad2.right_bumper){
-                Kevin.claw.release();
+                Mary.claw.release();
             }
 
             if(gamepad1.dpad_left||gamepad2.dpad_left){
-                Kevin.claw.up();
+                Mary.claw.out();
             }
 
             if(gamepad1.dpad_right|| gamepad2.dpad_right){
-                Kevin.claw.down();
+                Mary.claw.in();
+            }
+
+            if(gamepad1.left_stick_button|| gamepad2.left_stick_button){
+                Mary.claw.up();
             }
 
             if(!hasRun && System.currentTimeMillis() - setTime > 2000) {
                 setTime = System.currentTimeMillis();
-                Kevin.launcher.shoot(-1);
+                Mary.launcher.shoot(-1);
                 forward = true;
             }
 
             if(forward && !hasRun && System.currentTimeMillis() - setTime > 2000) {
                 setTime = System.currentTimeMillis();
-                Kevin.launcher.shoot(0);
+                Mary.launcher.shoot(0);
                 hasRun = true;
             }
 

@@ -9,10 +9,12 @@ public class Claw {
     private Servo claw;
     private Servo lift;
 
-    private final static double GRAB = 0;
-    private final static double RELEASE = 0.20;
-    private final static double UP = 0.5;
-    private final static double DOWN = 1.0;
+    private final static double GRAB = 0.04;
+    private final static double RELEASE = 0.25;
+    private final static double IN = 0.40;
+    private final static double OUT= 1.00;
+    private final static double UP = 0.70;
+    private final static double INTERVAL = 30;
 
     public void init(HardwareMap hardwareMap) {
         // Foundation
@@ -22,7 +24,7 @@ public class Claw {
         lift.setDirection(Servo.Direction.FORWARD);
 
         lift.setPosition(0);
-        claw.setPosition(RELEASE);
+        in();
     }
 
     public void grab() {
@@ -33,12 +35,44 @@ public class Claw {
         claw.setPosition(RELEASE);
     }
 
-    public void up() {
-        lift.setPosition(UP);
-
+    public void in() {
+        long time = System.currentTimeMillis();
+        while(lift.getPosition() != IN) {
+            if(System.currentTimeMillis() - time > INTERVAL) {
+                time = System.currentTimeMillis();
+                lift.setPosition(lift.getPosition() - 0.01);
+                if (lift.getPosition() < IN) {
+                    lift.setPosition(IN);
+                }
+            }
+        }
     }
 
-    public void down() {
-        lift.setPosition(DOWN);
+    public void out() {
+        long time = System.currentTimeMillis();
+        while(lift.getPosition() != OUT) {
+            if(System.currentTimeMillis() - time > INTERVAL) {
+                time = System.currentTimeMillis();
+                lift.setPosition(lift.getPosition() + 0.01);
+                if (lift.getPosition() > OUT) {
+                    lift.setPosition(OUT);
+                }
+            }
+        }
+    }
+
+    public void up() {
+        long time = System.currentTimeMillis();
+        while(lift.getPosition() != IN) {
+            if(System.currentTimeMillis() - time > INTERVAL) {
+                time = System.currentTimeMillis();
+                if (lift.getPosition() < UP) {
+                    lift.setPosition(lift.getPosition() + 0.01);
+                }
+                if (lift.getPosition() > UP) {
+                    lift.setPosition(lift.getPosition() - 0.01);
+                }
+            }
+        }
     }
 }
