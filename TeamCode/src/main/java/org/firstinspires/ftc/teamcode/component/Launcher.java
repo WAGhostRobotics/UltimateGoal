@@ -27,6 +27,10 @@ public class Launcher {
         launcher2 = hardwareMap.get(DcMotor.class, "l2");
         mover = hardwareMap.get(CRServo.class, "m");
 
+        launcher1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        launcher2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
 
         launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
         launcher2.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -34,7 +38,7 @@ public class Launcher {
 
         launcherMotors = new MultiDcMotor(launcher1, launcher2);
 
-        launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+//        launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
 //    public void power(double power) {
@@ -51,7 +55,8 @@ public class Launcher {
 //    }
 
     public void power(double power) {
-        launcherMotors.setPower(power);
+        launcher1.setPower(power);
+        launcher2.setPower(power);
     }
 
     public void shoot() {
@@ -71,7 +76,8 @@ public class Launcher {
     }
 
     public void stop() {
-        launcherMotors.setPower(0);
+        launcher1.setPower(0);
+        launcher2.setPower(0);
     }
 
     public void mover(double power) {

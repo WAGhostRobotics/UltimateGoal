@@ -62,17 +62,18 @@ public class Claw {
     }
 
     public void up() {
-        long time = System.currentTimeMillis();
-        while(lift.getPosition() != IN) {
-            if(System.currentTimeMillis() - time > INTERVAL) {
-                time = System.currentTimeMillis();
-                if (lift.getPosition() < UP) {
-                    lift.setPosition(lift.getPosition() + 0.01);
-                }
-                if (lift.getPosition() > UP) {
-                    lift.setPosition(lift.getPosition() - 0.01);
-                }
-            }
-        }
+//        long time = System.currentTimeMillis();
+//        while(lift.getPosition() != UP) {
+//            if(System.currentTimeMillis() - time > INTERVAL) {
+//                time = System.currentTimeMillis();
+//                if (lift.getPosition() < UP) {
+//                    lift.setPosition(lift.getPosition() + 0.01);
+//                }
+//                if (lift.getPosition() > UP) {
+//                    lift.setPosition(lift.getPosition() - 0.01);
+//                }
+//            }
+//        }
+        lift.setPosition(UP);
     }
 }

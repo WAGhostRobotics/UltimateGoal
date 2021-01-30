@@ -45,7 +45,11 @@ public class AutonomousParent extends EasyOpenCVExample {
                 moveToDrop();
                 break;
         }
+
         dropWobbleGoal();
+        if(position == RingPosition.FOUR) {
+            drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 0.5);
+        }
 
         moveToShootingPos();
 
@@ -61,6 +65,7 @@ public class AutonomousParent extends EasyOpenCVExample {
         switch(position) {
             case FOUR: // C
                 drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 4);
+                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 0.5);
                 break;
             case ONE: // B
                 drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 3);

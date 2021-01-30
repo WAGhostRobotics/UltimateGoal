@@ -23,6 +23,9 @@ public class TeleOpParent extends LinearOpMode {
     private long setTime = 0;
     private boolean forward = false;
 
+    // Wobble Claw variables
+    private boolean up = false;
+
     // Set default DriveType
     DriveStyle.DriveType type = DriveStyle.DriveType.MECANUMARCADE;
 
@@ -73,7 +76,7 @@ public class TeleOpParent extends LinearOpMode {
             } else if (gamepad1.dpad_down || gamepad2.dpad_down) { // middle power
                 Mary.launcher.power(0.9);
             } else {
-                Mary.launcher.power(0.0);
+                Mary.launcher.stop();
             }
             // Launcher Mover
 
@@ -96,14 +99,17 @@ public class TeleOpParent extends LinearOpMode {
 
             if(gamepad1.dpad_left||gamepad2.dpad_left){
                 Mary.claw.out();
+                up = false;
             }
 
             if(gamepad1.dpad_right|| gamepad2.dpad_right){
                 Mary.claw.in();
+                up = false;
             }
 
-            if(gamepad1.left_stick_button|| gamepad2.left_stick_button){
+            if((gamepad1.left_stick_button|| gamepad2.left_stick_button) && !up){
                 Mary.claw.up();
+                up = true;
             }
 
             if(!hasRun && System.currentTimeMillis() - setTime > 2000) {
