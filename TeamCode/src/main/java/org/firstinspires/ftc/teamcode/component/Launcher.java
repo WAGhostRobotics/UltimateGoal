@@ -28,7 +28,7 @@ public class Launcher {
         mover = hardwareMap.get(CRServo.class, "m");
 
         launcher1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        launcher2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        launcher2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
 
@@ -54,9 +54,9 @@ public class Launcher {
 //        launcherMotors.setPower(0);
 //    }
 
-    public void power(double power) {
-        launcher1.setPower(power);
-        launcher2.setPower(power);
+    public void power(double power1, double power2) {
+        launcher1.setPower(power1);
+        launcher2.setPower(power2);
     }
 
     public void shoot() {

@@ -55,7 +55,7 @@ public class TeleOpParent extends LinearOpMode {
             */
 
             // Drivie using set drivemode (g1.ls/rs, g1.lb/rb)
-            DriveStyle.driveWithType(Mary.driveMotors, gamepad1, type);
+            DriveStyle.driveWithType(Mary.driveMotors, gamepad2, type);
 
             // Wobble Goal Claw
 
@@ -72,9 +72,9 @@ public class TeleOpParent extends LinearOpMode {
             // Launcher
             // Launcher Wheels
             if (gamepad1.dpad_up || gamepad2.dpad_up) { // top power
-                Mary.launcher.power(1);
+                Mary.launcher.power(1, 0.9);
             } else if (gamepad1.dpad_down || gamepad2.dpad_down) { // middle power
-                Mary.launcher.power(0.9);
+                Mary.launcher.power(0.9, 0.8);
             } else {
                 Mary.launcher.stop();
             }
@@ -97,12 +97,12 @@ public class TeleOpParent extends LinearOpMode {
                 Mary.claw.release();
             }
 
-            if(gamepad1.dpad_left||gamepad2.dpad_left){
+            if(gamepad1.dpad_right||gamepad2.dpad_right){
                 Mary.claw.out();
                 up = false;
             }
 
-            if(gamepad1.dpad_right|| gamepad2.dpad_right){
+            if(gamepad1.dpad_left|| gamepad2.dpad_left){
                 Mary.claw.in();
                 up = false;
             }
