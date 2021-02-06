@@ -20,8 +20,9 @@ public class TeleOpParent extends LinearOpMode {
 
     // Launcher mover variables
     private boolean hasRun = true;
-    private long setTime = 0;
-    private boolean forward = false;
+    private boolean hasRun2 = true;
+    private long servotime = 0;
+    private long ringtime = 0;
 
     // Wobble Claw variables
     private boolean up = false;
@@ -81,11 +82,23 @@ public class TeleOpParent extends LinearOpMode {
             // Launcher Mover
 
             if(gamepad1.y || gamepad2.y) {
-                setTime = System.currentTimeMillis();
+                servotime = System.currentTimeMillis();
+                Mary.launcher.TeleShoot(1);
                 hasRun = false;
-                forward = false;
 
-                Mary.launcher.shoot(1);
+            }
+
+            if(!hasRun && System.currentTimeMillis() - servotime > 200) {
+                Mary.launcher.TeleShoot(0);
+                Mary.intake.in();
+                ringtime = System.currentTimeMillis();
+                hasRun = true;
+                hasRun2 = false;
+            }
+
+            if(!hasRun2 && System.currentTimeMillis() - ringtime > 100) {
+                Mary.intake.stop();
+                hasRun2 = true;
             }
 
             // Wobble Claw
@@ -110,18 +123,6 @@ public class TeleOpParent extends LinearOpMode {
             if((gamepad1.left_stick_button|| gamepad2.left_stick_button) && !up){
                 Mary.claw.up();
                 up = true;
-            }
-
-            if(!hasRun && System.currentTimeMillis() - setTime > 2000) {
-                setTime = System.currentTimeMillis();
-                Mary.launcher.shoot(-1);
-                forward = true;
-            }
-
-            if(forward && !hasRun && System.currentTimeMillis() - setTime > 2000) {
-                setTime = System.currentTimeMillis();
-                Mary.launcher.shoot(0);
-                hasRun = true;
             }
 
             // Send diagnostics to user

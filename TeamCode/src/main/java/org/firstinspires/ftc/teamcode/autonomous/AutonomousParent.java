@@ -52,22 +52,24 @@ public class AutonomousParent extends EasyOpenCVExample {
 
 
 
-//        Mary.launcher.power(1, 0.9);
-//        shoot();
-//        intake();
-//        shoot();
-//        intake();
-//        shoot();
-//        Mary.launcher.power(0,0);
+        Mary.launcher.power(1, 0.9);
+        Mary.launcher.shoot();
+        intake();
+        Mary.launcher.shoot();
+        intake();
+        Mary.launcher.shoot();
+        Mary.launcher.power(0,0);
+
+        moveToPark();
     }
 
     public void moveToPark() {
         switch (position) {
             case FOUR:
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.2);
+                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.4);
                 break;
             case ONE:
-//                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.21);
+                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.21);
                 break;
             case NONE:
                 drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.3);
@@ -78,18 +80,20 @@ public class AutonomousParent extends EasyOpenCVExample {
 
     public void moveToDrop() {
         if (teamColor == TeamColor.BLUE) {
-            drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, .75);
+            drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, .6);
         } else {
             drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, .75);
         }
-        sleep(400);
+        sleep(100);
+        drivetrain.turn(DriveAuto.TurnDirection.LEFT, 0.5, 0.1);
+        sleep(100);
         switch(position) {
             case FOUR: // C
-                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 4.5);
-                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 0.5);
+                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 4.2);
+                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 0.6);
                 break;
             case ONE: // B
-                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 3.5);
+                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 3);
                 if (teamColor == TeamColor.BLUE) {
                     drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, 1.5);
                 } else {
@@ -97,7 +101,9 @@ public class AutonomousParent extends EasyOpenCVExample {
                 }
                 break;
             case NONE: // A
-                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 2.5);
+                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 2.4);
+                sleep(100);
+                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 0.5, 0.8);
                 break;
         }
     }
@@ -113,7 +119,7 @@ public class AutonomousParent extends EasyOpenCVExample {
     public void moveToShootingPos() {
         switch(position) {
             case FOUR: // C
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 2.1);
+                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 2);
                 drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 0.5);
                 break;
             case ONE: // B
@@ -126,22 +132,12 @@ public class AutonomousParent extends EasyOpenCVExample {
                 break;
             case NONE: // A
                 drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.5);
-                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 1);
+                drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, 0.5);
                 break;
         }
         sleep(200);
         drivetrain.turn(DriveAuto.TurnDirection.RIGHT, 1, 1.6);
         sleep(200);
-    }
-
-    public void shoot() {
-        sleep(1000);
-        Mary.launcher.mover(1);
-        Mary.sleep(2000);
-        Mary.launcher.mover(0.0);
-        Mary.launcher.mover(-1);
-        Mary.sleep(2000);
-        Mary.launcher.mover(0);
     }
 
     public void intake() {

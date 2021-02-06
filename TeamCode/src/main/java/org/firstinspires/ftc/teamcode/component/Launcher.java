@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.component;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.core.Mary;
 import org.firstinspires.ftc.teamcode.library.multimotors.MultiDcMotor;
@@ -13,7 +13,7 @@ public class Launcher {
     // Launcher
     private DcMotor launcher1;
     private DcMotor launcher2;
-    private CRServo mover;
+    private Servo mover;
     private MultiDcMotor launcherMotors;
 
     private final static double POWER = 1.0;
@@ -25,16 +25,16 @@ public class Launcher {
         // Init intake motors
         launcher1 = hardwareMap.get(DcMotor.class, "l1");
         launcher2 = hardwareMap.get(DcMotor.class, "l2");
-        mover = hardwareMap.get(CRServo.class, "m");
+        mover = hardwareMap.get(Servo.class, "m");
 
-        launcher1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        launcher2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        launcher1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        launcher2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
 
         launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
         launcher2.setDirection(DcMotorSimple.Direction.REVERSE);
-        mover.setDirection(DcMotorSimple.Direction.REVERSE);
+        mover.setDirection(Servo.Direction.REVERSE);
 
         launcherMotors = new MultiDcMotor(launcher1, launcher2);
 
@@ -60,29 +60,20 @@ public class Launcher {
     }
 
     public void shoot() {
-        mover.setPower(1);
-        Mary.sleep(TIME2);
-        mover.setPower(0.0);
-        mover.setPower(-1);
-        Mary.sleep(TIME2);
-        mover.setPower(0);
+        mover.setPosition(1);
+        Mary.sleep(200);
+        mover.setPosition(0.0);
         Mary.intake.in();
-        Mary.sleep(100);
         Mary.intake.stop();
     }
 
-    public void shoot(int power) {
-        mover.setPower(power);
+    public void TeleShoot(double pos) {
+        mover.setPosition(pos);
     }
 
     public void stop() {
         launcher1.setPower(0);
         launcher2.setPower(0);
     }
-
-    public void mover(double power) {
-        mover.setPower(power);
-    }
-
 }
 
