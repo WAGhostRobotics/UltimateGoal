@@ -39,7 +39,8 @@ public class AutonomousParent extends EasyOpenCVExample {
             telemetry.addData("Last Position: ", position);
         }
 
-        straighten();
+        driveSensorsRight(30, 0.05);
+
         if(true)
             return;
 
@@ -49,6 +50,10 @@ public class AutonomousParent extends EasyOpenCVExample {
             case OUTSIDE:
                 moveToDrop();
                 break;
+        }
+
+        if(true) {
+            return;
         }
 
         dropWobbleGoal();
@@ -87,19 +92,24 @@ public class AutonomousParent extends EasyOpenCVExample {
     }
 
     public void moveToDrop() {
+//        turn(180);
+        sleep(2000);
         if (teamColor == TeamColor.BLUE) {
             drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, .6);
         } else {
-            drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, 1.25);
+            driveSensorsRight(60, .1);
+//          drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, 1.25);
         }
-        sleep(100);
-        drivetrain.turn(DriveAuto.TurnDirection.LEFT, 0.5, 0.1);
+//        sleep(100);
+//        drivetrain.turn(DriveAuto.TurnDirection.LEFT, 0.5, 0.1);
+//        sleep(100);
         sleep(100);
         switch(position) {
             case FOUR: // C
 //                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 4.2);
-                driveSensorsForward(20, 1);
+                driveSensorsForward(60, 1);
 //                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 0.5);
+                driveSensorsLeft(150, .1);
                 break;
             case ONE: // B
                 drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 3);
@@ -152,10 +162,23 @@ public class AutonomousParent extends EasyOpenCVExample {
     public void driveSensorsForward(int distance, double power) {
         while(opModeIsActive() && (Mary.sensors.getFrontRight() > distance || Mary.sensors.getFrontLeft() > distance)) {
             double motorPower = power;
-//            if(Mary.sensors.getFrontRight() < distance*2 || Mary.sensors.getFrontLeft() < distance*2) {
-//                motorPower = .2;
-//            }
             DriveStyle.MecanumArcade(Mary.driveMotors, motorPower, 0, 1, 0);
+        }
+    }
+
+    public void driveSensorsLeft(int distance, double power) {
+        while(opModeIsActive() && Mary.sensors.getLeft() > distance) {
+            double motorPower = power;
+            DriveStyle.MecanumArcade(Mary.driveMotors, motorPower, -1, 0, 0);
+        }
+    }
+
+    public void driveSensorsRight(int distance, double power) {
+        while(opModeIsActive() && Mary.sensors.getRight() > distance) {
+            telemetry.addData("Distance: ", Mary.sensors.getRight());
+            telemetry.update();
+            double motorPower = power;
+            DriveStyle.MecanumArcade(Mary.driveMotors, motorPower, 1, 0, 0);
         }
     }
 
@@ -174,6 +197,22 @@ public class AutonomousParent extends EasyOpenCVExample {
                 } else {
                     DriveStyle.MecanumArcade(Mary.driveMotors, -0.05, 0, 0, 0.2);
                 }
+        }
+    }
+
+    public void turn(int degrees) {
+        double curr_heading = Mary.imu.getHeading();
+        double new_heading = curr_heading + degrees;
+
+        while(opModeIsActive() && Math.abs(Mary.imu.getHeading() - new_heading) > 5) {
+            telemetry.addData("Current Heading: ", Mary.imu.getHeading());
+            telemetry.addData("New Heading: ", new_heading);
+            telemetry.update();
+            if(Mary.imu.getHeading() - new_heading < 0) {
+                DriveStyle.MecanumArcade(Mary.driveMotors, -0.05, 0,0,1);
+            } else {
+                DriveStyle.MecanumArcade(Mary.driveMotors, 0.05, 0,0,1);
+            }
         }
     }
 

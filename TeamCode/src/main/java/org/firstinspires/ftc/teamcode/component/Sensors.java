@@ -66,16 +66,16 @@ public class Sensors {
     }
 
     public double getFrontRight() {
-        return front_right.getDistance(DistanceUnit.INCH);
+        return front_right.getDistance(DistanceUnit.CM);
     }
     public double getFrontLeft() {
-        return front_left.getDistance(DistanceUnit.INCH);
+        return front_left.getDistance(DistanceUnit.CM);
     }
     public double getRight() {
-        return right.getDistance(DistanceUnit.INCH);
+        return right.getDistance(DistanceUnit.CM);
     }
     public double getLeft() {
-        return left.getDistance(DistanceUnit.INCH);
+        return left.getDistance(DistanceUnit.CM);
     }
 
 }

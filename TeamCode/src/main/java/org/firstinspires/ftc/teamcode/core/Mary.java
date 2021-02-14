@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.core;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.component.Claw;
+import org.firstinspires.ftc.teamcode.component.IMU;
 import org.firstinspires.ftc.teamcode.component.Intake;
 import org.firstinspires.ftc.teamcode.component.Launcher;
 import org.firstinspires.ftc.teamcode.component.Sensors;
@@ -33,18 +33,11 @@ public class Mary {
     // Sensors
     public static Sensors sensors;
 
+    //IMU
+    public static IMU imu;
+
     // Motor array [in order: lf, lr, rf, rr]
     public static ArrayList<DcMotor> driveMotors = new ArrayList<>();
-
-    /*
-    // Capstone
-    public static Servo capstone;
-    public static final double HOLD = 0.1;
-    public static final double LIBERATE = 0.9;
-    */
-
-    // Gyro
-    public static BNO055IMU imu;
 
     public static void init(HardwareMap hwMap) {
         // Assign HardwareMap
@@ -96,13 +89,14 @@ public class Mary {
         // Sensors
         sensors = new Sensors();
 
+        // IMU
+        imu = new IMU();
+
         intake.init(hardwareMap);
         launcher.init(hardwareMap);
         claw.init(hardwareMap);
         sensors.init();
-
-        // Gyro
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        imu.init();
     }
 
     /**
