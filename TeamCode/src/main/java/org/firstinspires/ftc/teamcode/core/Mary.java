@@ -5,9 +5,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.component.Intake;
 import org.firstinspires.ftc.teamcode.component.Claw;
+import org.firstinspires.ftc.teamcode.component.Intake;
 import org.firstinspires.ftc.teamcode.component.Launcher;
+import org.firstinspires.ftc.teamcode.component.Sensors;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,9 @@ public class Mary {
 
     // Launcher
     public static Launcher launcher;
+
+    // Sensors
+    public static Sensors sensors;
 
     // Motor array [in order: lf, lr, rf, rr]
     public static ArrayList<DcMotor> driveMotors = new ArrayList<>();
@@ -57,7 +61,7 @@ public class Mary {
         // The motors turn counterclockwise looking at them head on for FORWARD; set the right ones to reverse for correct operation
         dFrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         dFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        dBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        dBackLeft.setDirection(DcMotorSimple.Direction.FORWARD); // This is super sketchy... idk why its backwards?
         dBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Adjust motor stopping behavior; "BRAKE" locks the motor shaft, while "FLOAT" just stops applying power
@@ -89,9 +93,13 @@ public class Mary {
         // Launcher
         launcher = new Launcher();
 
+        // Sensors
+        sensors = new Sensors();
+
         intake.init(hardwareMap);
         launcher.init(hardwareMap);
         claw.init(hardwareMap);
+        sensors.init();
 
         // Gyro
         imu = hardwareMap.get(BNO055IMU.class, "imu");
