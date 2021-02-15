@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 //novathedog was here
+
 import org.firstinspires.ftc.teamcode.core.EasyOpenCVExample;
 import org.firstinspires.ftc.teamcode.core.Mary;
 import org.firstinspires.ftc.teamcode.library.DriveAuto;
+import org.firstinspires.ftc.teamcode.library.DriveSensor;
 import org.firstinspires.ftc.teamcode.library.DriveStyle;
 
 public class AutonomousParent extends EasyOpenCVExample {
@@ -13,6 +15,7 @@ public class AutonomousParent extends EasyOpenCVExample {
     RingPosition position = RingPosition.ONE;
 
     private DriveAuto drivetrain = new DriveAuto(Mary.driveMotors);
+    private DriveSensor drivetrain2 = new DriveSensor(Mary.driveMotors);
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -39,7 +42,7 @@ public class AutonomousParent extends EasyOpenCVExample {
             telemetry.addData("Last Position: ", position);
         }
 
-        driveSensorsRight(30, 0.05);
+        drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 180);
 
         if(true)
             return;

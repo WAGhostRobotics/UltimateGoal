@@ -54,7 +54,7 @@ public class Mary {
         // The motors turn counterclockwise looking at them head on for FORWARD; set the right ones to reverse for correct operation
         dFrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         dFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        dBackLeft.setDirection(DcMotorSimple.Direction.FORWARD); // This is super sketchy... idk why its backwards?
+        dBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         dBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Adjust motor stopping behavior; "BRAKE" locks the motor shaft, while "FLOAT" just stops applying power
@@ -63,7 +63,6 @@ public class Mary {
         dBackLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         dBackRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-//        // THIS MAY OR MAY NOT WORK
 //        // set to use encoders (can use for specific speed or distance)
         dFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         dFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
