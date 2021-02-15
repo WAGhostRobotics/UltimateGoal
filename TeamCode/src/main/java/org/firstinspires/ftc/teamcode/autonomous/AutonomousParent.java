@@ -51,6 +51,7 @@ public class AutonomousParent extends EasyOpenCVExample {
 
         dropWobbleGoal();
 
+        getSecondWobbleGoal();
 
         if(true) {
             return;
@@ -102,7 +103,7 @@ public class AutonomousParent extends EasyOpenCVExample {
                 drivetrain2.straighten(-180);
                 drivetrain2.move(DriveSensor.MoveDirection.FORWARD, null,  30, 1);
                 sleep(100);
-                drivetrain2.move(DriveSensor.MoveDirection.RIGHT, DriveSensor.ReferenceDirection.TOWARDS,  60, 1);
+                drivetrain2.move(DriveSensor.MoveDirection.RIGHT, DriveSensor.ReferenceDirection.AWAY,  50, 1);
                 sleep(100);
                 break;
             case ONE: // B
@@ -120,9 +121,9 @@ public class AutonomousParent extends EasyOpenCVExample {
     public void dropWobbleGoal() {
         if(position == RingPosition.FOUR || position == RingPosition.NONE) {
             telemetry.addData("Current Heading: ", Mary.imu.getHeading());
-            telemetry.addData("New Heading: ", Mary.imu.getHeading() + 155);
+            telemetry.addData("New Heading: ", Mary.imu.getHeading() + 180);
             telemetry.update();
-            drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 155);
+            drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 180, .5);
         }
         Mary.claw.out();
         sleep(1500);
@@ -130,6 +131,18 @@ public class AutonomousParent extends EasyOpenCVExample {
         sleep(500);
         Mary.claw.in();
 
+        if(position == RingPosition.ONE) {
+            drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 180);
+        }
+
+        telemetry.addData("THE HEADING WE WANT: ", Mary.imu.getHeading());
+        telemetry.update();
+
+        drivetrain2.straighten(180);
+    }
+
+    public void getSecondWobbleGoal() {
+        drivetrain2.move(DriveSensor.MoveDirection.FORWARD, null, 60, 1);
     }
 
     public void moveToShootingPos() {

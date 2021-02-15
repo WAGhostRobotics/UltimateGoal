@@ -32,7 +32,7 @@ public class Launcher {
 
 
 
-        launcher1.setDirection(DcMotorSimple.Direction.REVERSE);
+        launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
         launcher2.setDirection(DcMotorSimple.Direction.FORWARD);
         mover.setDirection(Servo.Direction.REVERSE);
 

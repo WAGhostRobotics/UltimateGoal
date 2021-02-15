@@ -15,11 +15,17 @@ public class DriveSensor {
     }
 
     public void move(MoveDirection direction, ReferenceDirection reference, int distance, double power) {
+        double curr_heading = Mary.imu.getHeading();
         switch(direction) {
             case FORWARD:
                 while(Mary.sensors.getFrontRight() > distance && Mary.sensors.getFrontLeft() > distance) {
                     double motorPower = power;
-                    DriveStyle.MecanumArcade(Mary.driveMotors, motorPower, 0, 1, 0);
+                    double turn = 0;
+                    if(Math.abs(curr_heading - Mary.imu.getHeading()) > 3) {
+//                        turn =
+                    }
+
+                    DriveStyle.MecanumArcade(Mary.driveMotors, motorPower, 0, 1, turn);
                 }
                 break;
             case BACKWARD:
@@ -73,21 +79,44 @@ public class DriveSensor {
             if(Mary.imu.getHeading() - new_heading < 0) {
                 DriveStyle.MecanumArcade(motors, -1, 0,0,1);
             } else {
-                DriveStyle.MecanumArcade(motors, 1, 1,0,1);
+                DriveStyle.MecanumArcade(motors, 1, 0,0,1);
+            }
+        }
+        DriveStyle.MecanumArcade(Mary.driveMotors, 0, 0, 0 ,0);
+    }
+
+    public void turn(TurnDirection direction, int degrees, double power) {
+        double curr_heading = Mary.imu.getHeading();
+        double new_heading = curr_heading + (degrees);
+
+        while(Math.abs(Mary.imu.getHeading() - new_heading) > 5) {
+            if(Mary.imu.getHeading() - new_heading < 0) {
+                DriveStyle.MecanumArcade(motors, -power, 0,0,1);
+            } else {
+                DriveStyle.MecanumArcade(motors, power, 0,0,1);
             }
         }
         DriveStyle.MecanumArcade(Mary.driveMotors, 0, 0, 0 ,0);
     }
 
     public void straighten(double heading) {
-        while(Math.abs(Mary.imu.getHeading() - heading) > 5) {
+        double inc = 2;
+
+        if(heading < 0)  {
+            heading += inc;
+        } else if(heading > 0) {
+            heading -= inc;
+        }
+
+        while(Math.abs(Mary.imu.getHeading() - heading) > 2) {
             if(Mary.imu.getHeading() - heading < 0) {
-                DriveStyle.MecanumArcade(motors, -0.2, 0,0,1);
+                DriveStyle.MecanumArcade(motors, -0.5, 0,0,1);
             } else {
-                DriveStyle.MecanumArcade(motors, 0.2, 1,0,1);
+                DriveStyle.MecanumArcade(motors, 0.5, 1,0,1);
             }
         }
         DriveStyle.MecanumArcade(Mary.driveMotors, 0, 0, 0 ,0);
+        Mary.imu.init();
     }
 
     public enum MoveDirection {
