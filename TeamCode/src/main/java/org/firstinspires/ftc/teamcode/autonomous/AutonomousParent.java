@@ -5,7 +5,6 @@ import org.firstinspires.ftc.teamcode.core.EasyOpenCVExample;
 import org.firstinspires.ftc.teamcode.core.Mary;
 import org.firstinspires.ftc.teamcode.library.DriveAuto;
 import org.firstinspires.ftc.teamcode.library.DriveSensor;
-import org.firstinspires.ftc.teamcode.library.DriveStyle;
 
 public class AutonomousParent extends EasyOpenCVExample {
 
@@ -50,16 +49,22 @@ public class AutonomousParent extends EasyOpenCVExample {
                 break;
         }
 
+        dropWobbleGoal();
+
+
         if(true) {
             return;
         }
 
-        dropWobbleGoal();
 
         moveToShootingPos();
 
+        shoot();
 
+        moveToPark();
+    }
 
+    public void shoot() {
         Mary.launcher.power(1, 0.9);
         sleep(500);
         Mary.launcher.shoot();
@@ -70,8 +75,6 @@ public class AutonomousParent extends EasyOpenCVExample {
         sleep(500);
         Mary.launcher.shoot();
         Mary.launcher.power(0,0);
-
-        moveToPark();
     }
 
     public void moveToPark() {
@@ -92,13 +95,14 @@ public class AutonomousParent extends EasyOpenCVExample {
     public void moveToDrop() {
         drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 180);
         sleep(100);
-        drivetrain2.move(DriveSensor.MoveDirection.RIGHT, DriveSensor.ReferenceDirection.TOWARDS, 60, 1);
-        sleep(100);
+        drivetrain2.move(DriveSensor.MoveDirection.RIGHT, DriveSensor.ReferenceDirection.TOWARDS, 40, 1);
+        sleep(200);
         switch(position) {
             case FOUR: // C
-                drivetrain2.move(DriveSensor.MoveDirection.FORWARD, null, 60, 1);
-            sleep(100);
-                driveSensorsLeft(150, 1);
+                drivetrain2.straighten(-180);
+                drivetrain2.move(DriveSensor.MoveDirection.FORWARD, null,  30, 1);
+                sleep(100);
+                drivetrain2.move(DriveSensor.MoveDirection.RIGHT, DriveSensor.ReferenceDirection.TOWARDS,  60, 1);
                 sleep(100);
                 break;
             case ONE: // B
@@ -114,11 +118,18 @@ public class AutonomousParent extends EasyOpenCVExample {
     }
 
     public void dropWobbleGoal() {
+        if(position == RingPosition.FOUR || position == RingPosition.NONE) {
+            telemetry.addData("Current Heading: ", Mary.imu.getHeading());
+            telemetry.addData("New Heading: ", Mary.imu.getHeading() + 155);
+            telemetry.update();
+            drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 155);
+        }
         Mary.claw.out();
         sleep(1500);
         Mary.claw.release();
         sleep(500);
         Mary.claw.in();
+
     }
 
     public void moveToShootingPos() {
@@ -143,63 +154,6 @@ public class AutonomousParent extends EasyOpenCVExample {
         sleep(200);
         drivetrain.turn(DriveAuto.TurnDirection.RIGHT, 1, 1.6);
         sleep(200);
-    }
-
-    public void driveSensorsForward(int distance, double power) {
-        while(opModeIsActive() && (Mary.sensors.getFrontRight() > distance || Mary.sensors.getFrontLeft() > distance)) {
-            double motorPower = power;
-            DriveStyle.MecanumArcade(Mary.driveMotors, motorPower, 0, 1, 0);
-        }
-    }
-
-    public void driveSensorsLeft(int distance, double power) {
-        while(opModeIsActive() && Mary.sensors.getLeft() > distance) {
-            double motorPower = power;
-            DriveStyle.MecanumArcade(Mary.driveMotors, motorPower, -1, 0, 0);
-        }
-    }
-
-    public void driveSensorsRight(int distance, double power) {
-        while(opModeIsActive() && Mary.sensors.getRight() > distance) {
-            telemetry.addData("Distance: ", Mary.sensors.getRight());
-            telemetry.update();
-            double motorPower = power;
-            DriveStyle.MecanumArcade(Mary.driveMotors, motorPower, 1, 0, 0);
-        }
-    }
-
-    public void straighten() {
-        double right = Mary.sensors.getFrontRight();
-        double left = Mary.sensors.getFrontLeft();
-        while(opModeIsActive() && Math.abs(right-left) > 1.5) {
-            right = Mary.sensors.getFrontRight();
-            left = Mary.sensors.getFrontLeft();
-            telemetry.addData("Right: ", right);
-            telemetry.addData("Left: ", left);
-            telemetry.update();
-                if(right-left < 0) {
-                    // left too far away, right too close
-                    DriveStyle.MecanumArcade(Mary.driveMotors, 0.05, 0, 0, 0.2);
-                } else {
-                    DriveStyle.MecanumArcade(Mary.driveMotors, -0.05, 0, 0, 0.2);
-                }
-        }
-    }
-
-    public void turn(int degrees) {
-        double curr_heading = Mary.imu.getHeading();
-        double new_heading = curr_heading + degrees;
-
-        while(opModeIsActive() && Math.abs(Mary.imu.getHeading() - new_heading) > 5) {
-            telemetry.addData("Current Heading: ", Mary.imu.getHeading());
-            telemetry.addData("New Heading: ", new_heading);
-            telemetry.update();
-            if(Mary.imu.getHeading() - new_heading < 0) {
-                DriveStyle.MecanumArcade(Mary.driveMotors, -0.05, 0,0,1);
-            } else {
-                DriveStyle.MecanumArcade(Mary.driveMotors, 0.05, 0,0,1);
-            }
-        }
     }
 
     public void intake() {

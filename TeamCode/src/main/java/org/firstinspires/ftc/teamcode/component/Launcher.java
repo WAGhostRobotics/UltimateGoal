@@ -32,8 +32,8 @@ public class Launcher {
 
 
 
-        launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
-        launcher2.setDirection(DcMotorSimple.Direction.REVERSE);
+        launcher1.setDirection(DcMotorSimple.Direction.REVERSE);
+        launcher2.setDirection(DcMotorSimple.Direction.FORWARD);
         mover.setDirection(Servo.Direction.REVERSE);
 
         launcherMotors = new MultiDcMotor(launcher1, launcher2);
