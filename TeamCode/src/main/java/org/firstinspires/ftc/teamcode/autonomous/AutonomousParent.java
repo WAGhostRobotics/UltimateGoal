@@ -42,11 +42,6 @@ public class AutonomousParent extends EasyOpenCVExample {
             telemetry.addData("Last Position: ", position);
         }
 
-        drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 180);
-
-        if(true)
-            return;
-
         switch (startLocation) {
             case INSIDE:
                 break;
@@ -95,32 +90,20 @@ public class AutonomousParent extends EasyOpenCVExample {
     }
 
     public void moveToDrop() {
-//        turn(180);
-        sleep(2000);
-        if (teamColor == TeamColor.BLUE) {
-            drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, .6);
-        } else {
-            driveSensorsRight(60, .1);
-//          drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, 1.25);
-        }
-//        sleep(100);
-//        drivetrain.turn(DriveAuto.TurnDirection.LEFT, 0.5, 0.1);
-//        sleep(100);
+        drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 180);
+        sleep(100);
+        drivetrain2.move(DriveSensor.MoveDirection.RIGHT, DriveSensor.ReferenceDirection.TOWARDS, 60, 1);
         sleep(100);
         switch(position) {
             case FOUR: // C
-//                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 4.2);
-                driveSensorsForward(60, 1);
-//                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 0.5);
-                driveSensorsLeft(150, .1);
+                drivetrain2.move(DriveSensor.MoveDirection.FORWARD, null, 60, 1);
+            sleep(100);
+                driveSensorsLeft(150, 1);
+                sleep(100);
                 break;
             case ONE: // B
                 drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 3);
-                if (teamColor == TeamColor.BLUE) {
-                    drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, 1.5);
-                } else {
-                    drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 1.5);
-                }
+                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 1.5);
                 break;
             case NONE: // A
                 drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 2.4);
