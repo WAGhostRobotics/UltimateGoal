@@ -51,7 +51,9 @@ public class AutonomousParent extends EasyOpenCVExample {
 
         dropWobbleGoal();
 
-        getSecondWobbleGoal();
+        goToSecondWobbleGoal();
+
+        grabSecondWobbleGoal();
 
         if(true) {
             return;
@@ -132,25 +134,33 @@ public class AutonomousParent extends EasyOpenCVExample {
             drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 18, 0.5);
         }
 
-        sleep(2000);
-        telemetry.addData("THE HEADING WE WANT: ", Mary.imu.getHeading());
-        telemetry.update();
-
-        sleep(2000);
-
         drivetrain2.straighten(0);
     }
 
-    public void getSecondWobbleGoal() {
+    public void goToSecondWobbleGoal() {
 //        drivetrain2.move(DriveSensor.MoveDirection.FORWARD, null, 60, 1);
+//        drivetrain2.diagonalForwardLeft(60, 40);
+//        drivetrain2.move(DriveSensor.MoveDirection.FORWARD, 60, 1, DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 30, 1);
 
-        telemetry.addData("Driving Forward Now", "");
-        telemetry.update();
-        sleep(5000);
-        drivetrain2.move(DriveSensor.MoveDirection.FORWARD, 60, 1, DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 40, 1);
+        drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 1);
+        drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 30, 1);
+        drivetrain2.straighten(0);
+        drivetrain2.move(DriveSensor.MoveDirection.FORWARD, null, 60, 1);
 
-        sleep(5000);
         drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 180, 1);
+    }
+
+    public void grabSecondWobbleGoal() {
+        telemetry.addData("Left Distance: ", Mary.sensors.getLeft());
+        sleep(4000);
+        drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.AWAY, 60, 1);
+        sleep(5000);
+        Mary.claw.release();
+        Mary.claw.out();
+        sleep(500);
+        Mary.claw.grab();
+        sleep(400);
+        Mary.claw.in();
     }
 
     public void moveToShootingPos() {

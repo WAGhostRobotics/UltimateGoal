@@ -73,6 +73,28 @@ public class DriveSensor {
         DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
     }
 
+    public void diagonalForwardLeft(double x, double y) {
+        double x_on = 1;
+        double y_on = 0.6;
+        while((sensors.getFrontRight() > y && sensors.getFrontLeft() > y) || sensors.getLeft() > x) {
+
+
+            if(sensors.getFrontRight() < y || sensors.getFrontLeft() < y) {
+                y_on = 0;
+            }
+
+            if(sensors.getLeft() < x) {
+                x_on = 0;
+                y_on = 1;
+            }
+
+            DriveStyle.MecanumArcade(motors, 1, -x_on, y_on, 0);
+        }
+
+        DriveStyle.MecanumArcade(motors, 0, 0, 0, 0);
+    }
+
+    /*
     public void move(MoveDirection forwardbackward, int distance1, double power1, MoveDirection leftright, ReferenceDirection reference, int distance2, double power2) {
         switch(forwardbackward) {
             case FORWARD:
@@ -81,7 +103,7 @@ public class DriveSensor {
                         switch(reference) {
                             case TOWARDS:
                                 while((sensors.getFrontLeft() > distance2 && sensors.getFrontRight() < distance1) ||
-                                            sensors.getLeft() < distance2) {
+                                            sensors.getLeft() > distance2) {
                                     if(!(sensors.getFrontLeft() > distance2 && sensors.getFrontRight() > distance1)){
                                         power1 = 0;
                                     }
@@ -229,6 +251,7 @@ public class DriveSensor {
                 break;
         }
     }
+     */
 
     public void turn(TurnDirection direction, int degrees) {
         double curr_heading = Mary.imu.getHeading();
