@@ -52,24 +52,24 @@ import static org.firstinspires.ftc.teamcode.core.Mary.hardwareMap;
  */
 public class Sensors {
 
-    private DistanceSensor front_right;
-    private DistanceSensor front_left;
+    private DistanceSensor back;
+    private DistanceSensor front;
     private DistanceSensor right;
     private DistanceSensor left;
 
     public void init() {
         // you can use this as a regular DistanceSensor.
-        front_right = hardwareMap.get(DistanceSensor.class, "srf");
-        front_left = hardwareMap.get(DistanceSensor.class, "slf");
-        right = hardwareMap.get(DistanceSensor.class, "srr");
-        left = hardwareMap.get(DistanceSensor.class, "sll");
+        back = hardwareMap.get(DistanceSensor.class, "sb");
+        front = hardwareMap.get(DistanceSensor.class, "sf");
+        right = hardwareMap.get(DistanceSensor.class, "sr");
+        left = hardwareMap.get(DistanceSensor.class, "sl");
     }
 
-    public double getFrontRight() {
-        return front_right.getDistance(DistanceUnit.CM);
+    public double getBack() {
+        return back.getDistance(DistanceUnit.CM);
     }
-    public double getFrontLeft() {
-        return front_left.getDistance(DistanceUnit.CM);
+    public double getFront() {
+        return front.getDistance(DistanceUnit.CM);
     }
     public double getRight() {
         return right.getDistance(DistanceUnit.CM);

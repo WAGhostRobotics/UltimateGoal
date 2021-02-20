@@ -41,156 +41,124 @@ public class AutonomousParent extends EasyOpenCVExample {
             telemetry.addData("Last Position: ", position);
         }
 
-        switch (startLocation) {
-            case INSIDE:
-                break;
-            case OUTSIDE:
-                moveToDrop();
-                break;
-        }
+        // test: how to move in 2 directions using DriveStyle
+        // start with if x,y,turn values can affect power
+        // check if clockwise is positive or negative
+//        DriveStyle.MecanumArcade(Mary.driveMotors, 1, .5, 0, 0);
+//
+//        if(true) {
+//            return;
+//        }
+
+        moveToDrop(); // need to speed up this step
 
         dropWobbleGoal();
 
-        goToSecondWobbleGoal();
+        goToSecondWobbleGoal(); // needs to be very accurate for second step... slow down?
 
-        grabSecondWobbleGoal();
+        grabSecondWobbleGoal(); // inaccurate, maybe slow turn to make heading more accurate? would also depend on beginning heading
 
-        if(true) {
-            return;
-        }
+        shoot(); // This doesn't really work, often only shoots one ring, rarely two, never three... not sure why
 
+        drivetrain2.turn(-180, 1);
+        drivetrain2.straighten(0);
 
-        moveToShootingPos();
+        moveToDrop();
 
-        shoot();
+        dropWobbleGoal();
 
-        moveToPark();
+        park();
     }
 
     public void shoot() {
-        Mary.launcher.power(1, 0.9);
-        sleep(500);
-        Mary.launcher.shoot();
-        intake();
-        sleep(500);
-        Mary.launcher.shoot();
-        intake();
-        sleep(500);
-        Mary.launcher.shoot();
+        Mary.launcher.power(0.9, 1);
+        Mary.intake.in();
+        sleep(2000);
+
+        Mary.launcher.TeleShoot(1);
+        sleep(1000);
+        Mary.launcher.TeleShoot(0);
+        sleep(1000);
+        Mary.launcher.TeleShoot(1);
+        sleep(1000);
+        Mary.launcher.TeleShoot(0);
+        sleep(1000);
+        Mary.launcher.TeleShoot(1);
+        sleep(1000);
+        Mary.launcher.TeleShoot(0);
+
         Mary.launcher.power(0,0);
-    }
-
-    public void moveToPark() {
-        switch (position) {
-            case FOUR:
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.4);
-                break;
-            case ONE:
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.21);
-                break;
-            case NONE:
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.3);
-
-                break;
-        }
+        Mary.intake.stop();
     }
 
     public void moveToDrop() {
-        drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 180);
-        sleep(100);
-        drivetrain2.move(DriveSensor.MoveDirection.RIGHT, DriveSensor.ReferenceDirection.TOWARDS, 40, 1);
-        sleep(200);
+        drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 40, 1);
+        drivetrain2.straighten(-0);
         switch(position) {
             case FOUR: // C
-                drivetrain2.straighten(-180);
-                drivetrain2.move(DriveSensor.MoveDirection.FORWARD, null,  30, 1);
-                sleep(100);
-                drivetrain2.move(DriveSensor.MoveDirection.RIGHT, DriveSensor.ReferenceDirection.AWAY,  50, 1);
-                sleep(100);
+                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.TOWARDS,  30, 1);
+                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.AWAY,  50, 1);
                 break;
             case ONE: // B
-                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 3);
-                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 1.5);
+                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.TOWARDS,  90, 1);
+                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.AWAY,   90, 1);
                 break;
             case NONE: // A
-                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, 1, 2.4);
-                sleep(100);
-                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 0.5, 0.8);
+                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.TOWARDS,  150, 1);
+                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.AWAY,  50, 1);
                 break;
         }
+        drivetrain2.straighten(0);
     }
 
     public void dropWobbleGoal() {
-        if(position == RingPosition.FOUR || position == RingPosition.NONE) {
-            drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 180); // sometimes this works, sometimes it doesn't
-        }
         Mary.claw.out();
-        sleep(1500);
+        sleep(1000);
         Mary.claw.release();
         sleep(500);
         Mary.claw.in();
-
-        if(position == RingPosition.ONE) {
-            drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 18, 0.5);
-        }
-
-        drivetrain2.straighten(0);
     }
 
     public void goToSecondWobbleGoal() {
-//        drivetrain2.move(DriveSensor.MoveDirection.FORWARD, null, 60, 1);
-//        drivetrain2.diagonalForwardLeft(60, 40);
-//        drivetrain2.move(DriveSensor.MoveDirection.FORWARD, 60, 1, DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 30, 1);
-
-        drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 1);
-        drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 30, 1);
-        drivetrain2.straighten(0);
-        drivetrain2.move(DriveSensor.MoveDirection.FORWARD, null, 60, 1);
-
-        drivetrain2.turn(DriveSensor.TurnDirection.RIGHT, 180, 1);
+        switch (position) {
+            case FOUR:
+                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.AWAY, 60, 1);
+                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 30, 1);
+                break;
+            case ONE:
+                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.AWAY, 150, 1);
+                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 30, 1);
+                break;
+            case NONE:
+                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.AWAY, 200, 1);
+                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 30, 1);
+                break;
+        }
+       drivetrain2.straighten(0);
+        drivetrain2.move(DriveSensor.MoveDirection.FORWARD, DriveSensor.ReferenceDirection.TOWARDS, 48, 1);
+        drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.AWAY, 75, 1);
+        // before turn
+        // Front = 48cm
+        // Left = 75
     }
 
     public void grabSecondWobbleGoal() {
-        telemetry.addData("Left Distance: ", Mary.sensors.getLeft());
-        sleep(4000);
-        drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.AWAY, 60, 1);
-        sleep(5000);
+        Mary.intake.in();
+        Mary.launcher.power(0.9, 1);
+
         Mary.claw.release();
         Mary.claw.out();
-        sleep(500);
+
+        drivetrain2.turn(180, 0.5);
+
+        sleep(800);
         Mary.claw.grab();
-        sleep(400);
+        sleep(500);
         Mary.claw.in();
     }
 
-    public void moveToShootingPos() {
-        switch(position) {
-            case FOUR: // C
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 2);
-                drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 0.5);
-                break;
-            case ONE: // B
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 1.1);
-                if (teamColor == TeamColor.BLUE) {
-                    drivetrain.move(DriveAuto.MoveDirection.RIGHT, 1, 1);
-                } else {
-                    drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, 1);
-                }
-                break;
-            case NONE: // A
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.5);
-                drivetrain.move(DriveAuto.MoveDirection.LEFT, 1, 0.5);
-                break;
-        }
-        sleep(200);
-        drivetrain.turn(DriveAuto.TurnDirection.RIGHT, 1, 1.6);
-        sleep(200);
-    }
-
-    public void intake() {
-        Mary.intake.in();
-        sleep(200);
-        Mary.intake.stop();
+    public void park() {
+        drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.AWAY, 190, 1);
     }
 
     enum StartLocation {
