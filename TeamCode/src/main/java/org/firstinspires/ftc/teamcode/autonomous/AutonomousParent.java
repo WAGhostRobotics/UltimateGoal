@@ -44,7 +44,9 @@ public class AutonomousParent extends EasyOpenCVExample {
         // test: how to move in 2 directions using DriveStyle
         // start with if x,y,turn values can affect power
         // check if clockwise is positive or negative
-//        DriveStyle.MecanumArcade(Mary.driveMotors, 1, .5, 0, 0);
+//        DriveStyle.MecanumArcade(Mary.driveMotors, 1, 0, -1, -1);
+//
+//        sleep(3000);
 //
 //        if(true) {
 //            return;
@@ -54,13 +56,13 @@ public class AutonomousParent extends EasyOpenCVExample {
 
         dropWobbleGoal();
 
-        goToSecondWobbleGoal(); // needs to be very accurate for second step... slow down?
+        goToSecondWobbleGoal();
 
-        grabSecondWobbleGoal(); // inaccurate, maybe slow turn to make heading more accurate? would also depend on beginning heading
+        grabSecondWobbleGoal();
 
-        shoot(); // This doesn't really work, often only shoots one ring, rarely two, never three... not sure why
+//        shoot(); // This doesn't really work, often only shoots one ring, rarely two, never three... not sure why
 
-        drivetrain2.turn(-180, 1);
+        drivetrain2.turn(-165, 1);
         drivetrain2.straighten(0);
 
         moveToDrop();
@@ -92,23 +94,28 @@ public class AutonomousParent extends EasyOpenCVExample {
     }
 
     public void moveToDrop() {
-        drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 40, 1);
-        drivetrain2.straighten(-0);
         switch(position) {
             case FOUR: // C
-                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.TOWARDS,  30, 1);
-                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.AWAY,  50, 1);
+                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 35, 1);
+                drivetrain2.straighten(-0);
+                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.TOWARDS,  30, 1);
+                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.AWAY,  30, 1);
+                drivetrain2.straighten(0);
                 break;
             case ONE: // B
-                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.TOWARDS,  90, 1);
-                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.AWAY,   90, 1);
+                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 35, 1);
+                drivetrain2.straighten(-0);
+                drivetrain2.move(DriveSensor.Sensor.FRONT, DriveSensor.ReferenceDirection.AWAY, 120, 1);
+                drivetrain2.moveAndTurn(90, 1);
                 break;
             case NONE: // A
-                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.TOWARDS,  150, 1);
-                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.AWAY,  50, 1);
+                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 50, 1);
+                drivetrain2.straighten(-0);
+                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.TOWARDS,  200, 1);
+                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.AWAY,  55, 1);
+                drivetrain2.straighten(0);
                 break;
         }
-        drivetrain2.straighten(0);
     }
 
     public void dropWobbleGoal() {
@@ -120,23 +127,12 @@ public class AutonomousParent extends EasyOpenCVExample {
     }
 
     public void goToSecondWobbleGoal() {
-        switch (position) {
-            case FOUR:
-                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.AWAY, 60, 1);
-                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 30, 1);
-                break;
-            case ONE:
-                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.AWAY, 150, 1);
-                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 30, 1);
-                break;
-            case NONE:
-                drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.AWAY, 200, 1);
-                drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 30, 1);
-                break;
+        if(position == RingPosition.ONE) {
+            drivetrain2.moveAndTurn(-90, 1);
         }
-       drivetrain2.straighten(0);
-        drivetrain2.move(DriveSensor.MoveDirection.FORWARD, DriveSensor.ReferenceDirection.TOWARDS, 48, 1);
-        drivetrain2.move(DriveSensor.MoveDirection.LEFT, DriveSensor.ReferenceDirection.AWAY, 75, 1);
+        drivetrain2.straighten(0);
+        drivetrain2.move(DriveSensor.Sensor.FRONT, DriveSensor.ReferenceDirection.TOWARDS, 48, 1);
+        drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.AWAY, 65, 1);
         // before turn
         // Front = 48cm
         // Left = 75
@@ -151,14 +147,27 @@ public class AutonomousParent extends EasyOpenCVExample {
 
         drivetrain2.turn(180, 0.5);
 
-        sleep(800);
+        sleep(700);
+
         Mary.claw.grab();
-        sleep(500);
+        sleep(400);
         Mary.claw.in();
     }
 
     public void park() {
-        drivetrain2.move(DriveSensor.MoveDirection.BACKWARD, DriveSensor.ReferenceDirection.AWAY, 190, 1);
+        switch(position) {
+            case FOUR:
+                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.AWAY, 180, 1);
+                break;
+            case ONE:
+                drivetrain2.move(DriveSensor.Sensor.FRONT, DriveSensor.ReferenceDirection.TOWARDS, 55, 1);
+                drivetrain2.moveAndTurn2(70, 1);
+                break;
+            case NONE:
+                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.AWAY, 80, 1);
+                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.TOWARDS, 180, 1);
+                break;
+        }
     }
 
     enum StartLocation {

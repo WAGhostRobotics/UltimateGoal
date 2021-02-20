@@ -53,23 +53,23 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 @TeleOp(name = "Sensor: REV2mDistance", group = "Sensor")
 public class SensorREV2mDistance extends LinearOpMode {
 
-    private DistanceSensor front_right;
-    private DistanceSensor front_left;
+    private DistanceSensor back;
+    private DistanceSensor front;
     private DistanceSensor right;
     private DistanceSensor left;
 
     @Override
     public void runOpMode() {
         // you can use this as a regular DistanceSensor.
-        front_right = hardwareMap.get(DistanceSensor.class, "srf");
-        front_left = hardwareMap.get(DistanceSensor.class, "slf");
-        right = hardwareMap.get(DistanceSensor.class, "srr");
-        left = hardwareMap.get(DistanceSensor.class, "sll");
+        back = hardwareMap.get(DistanceSensor.class, "sb");
+        front = hardwareMap.get(DistanceSensor.class, "sf");
+        right = hardwareMap.get(DistanceSensor.class, "sr");
+        left = hardwareMap.get(DistanceSensor.class, "sl");
 
         // you can also cast this to a Rev2mDistanceSensor if you want to use added
         // methods associated with the Rev2mDistanceSensor class.
-        Rev2mDistanceSensor sensorTimeOfFlightFR = (Rev2mDistanceSensor)front_right;
-        Rev2mDistanceSensor sensorTimeOfFlightFL = (Rev2mDistanceSensor)front_left;
+        Rev2mDistanceSensor sensorTimeOfFlightFR = (Rev2mDistanceSensor)back;
+        Rev2mDistanceSensor sensorTimeOfFlightFL = (Rev2mDistanceSensor)front;
         Rev2mDistanceSensor sensorTimeOfFlightR = (Rev2mDistanceSensor)right;
         Rev2mDistanceSensor sensorTimeOfFlightL = (Rev2mDistanceSensor)left;
 
@@ -79,8 +79,8 @@ public class SensorREV2mDistance extends LinearOpMode {
         waitForStart();
         while(opModeIsActive()) {
             // generic DistanceSensor methods.
-            telemetry.addData("Front Right: ", String.format("%.01f cm", front_right.getDistance(DistanceUnit.CM)));
-            telemetry.addData("Front Left: ", String.format("%.01f cm", front_left.getDistance(DistanceUnit.CM)));
+            telemetry.addData("Back: ", String.format("%.01f cm", back.getDistance(DistanceUnit.CM)));
+            telemetry.addData("Front: ", String.format("%.01f cm", front.getDistance(DistanceUnit.CM)));
             telemetry.addData("Right: ", String.format("%.01f cm", right.getDistance(DistanceUnit.CM)));
             telemetry.addData("Left: ", String.format("%.01f cm", left.getDistance(DistanceUnit.CM)));
             telemetry.update();

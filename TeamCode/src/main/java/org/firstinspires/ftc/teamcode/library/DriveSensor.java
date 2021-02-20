@@ -22,9 +22,9 @@ public class DriveSensor {
 //        this.imu = imu;
     }
 
-    public void move(MoveDirection direction, ReferenceDirection reference, int distance, double power) {
+    public void move(Sensor direction, ReferenceDirection reference, int distance, double power) {
         switch(direction) {
-            case FORWARD:
+            case FRONT:
                 switch(reference) {
                     case TOWARDS:
                         while(sensors.getFront() > distance) {
@@ -38,7 +38,7 @@ public class DriveSensor {
                         break;
                 }
                 break;
-            case BACKWARD:
+            case BACK:
                 switch(reference) {
                     case TOWARDS:
                         while(sensors.getBack() > distance) {
@@ -84,6 +84,38 @@ public class DriveSensor {
                         break;
                 }
                 break;
+        }
+        DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
+    }
+
+    // specifically makes robot move backwards and turn counterclockwise
+    public void moveAndTurn(double degrees, double power) {
+        double curr_heading = Mary.imu.getHeading();
+        double new_heading = curr_heading + (degrees);
+
+        while(Math.abs(Mary.imu.getHeading() - new_heading) > 8) {
+            if(Mary.imu.getHeading() - new_heading < 0) {
+                DriveStyle.MecanumArcade(motors, power, 0,-1,-1);
+            }
+            if(Mary.imu.getHeading() - new_heading > 0) {
+                DriveStyle.MecanumArcade(motors, power, 0,1,1);
+            }
+        }
+        DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
+    }
+
+    // specifically makes robot move forward and turn counterclockwise
+    public void moveAndTurn2(double degrees, double power) {
+        double curr_heading = Mary.imu.getHeading();
+        double new_heading = curr_heading + (degrees);
+
+        while(Math.abs(Mary.imu.getHeading() - new_heading) > 8) {
+            if(Mary.imu.getHeading() - new_heading < 0) {
+                DriveStyle.MecanumArcade(motors, power, 0,1,-1);
+            }
+            if(Mary.imu.getHeading() - new_heading > 0) {
+                DriveStyle.MecanumArcade(motors, power, 0,-1,1);
+            }
         }
         DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
     }
@@ -145,16 +177,11 @@ public class DriveSensor {
         DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
     }
 
-    public enum MoveDirection {
-        FORWARD,
-        BACKWARD,
+    public enum Sensor {
+        FRONT,
+        BACK,
         LEFT,
         RIGHT
-    }
-
-    public enum TurnDirection {
-        RIGHT,
-        LEFT
     }
 
     public enum ReferenceDirection {
