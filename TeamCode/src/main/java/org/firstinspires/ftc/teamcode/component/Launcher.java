@@ -75,5 +75,12 @@ public class Launcher {
         launcher1.setPower(0);
         launcher2.setPower(0);
     }
+
+    public double[] getSpeed() {
+        double[] speed = new double[2];
+        speed[0] = launcher1.getPower();
+        speed[1] = launcher2.getPower();
+        return speed;
+    }
 }
 
