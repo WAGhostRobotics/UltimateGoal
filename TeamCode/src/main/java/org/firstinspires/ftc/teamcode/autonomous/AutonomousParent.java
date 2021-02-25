@@ -65,23 +65,22 @@ public class AutonomousParent extends EasyOpenCVExample {
 
         moveToDrop2();
 
-        drivetrain2.straighten(-180);
-        shoot(); // This doesn't really work, often only shoots one ring, rarely two, never three... not sure why
-
-        drivetrain2.turn(-90, 0.5);
-
-        if(true)return;
-
+        if(position == RingPosition.ONE) {
+            shoot();
+            drivetrain2.turn(-90, 1); // gets stuck here
+        } else if (position == RingPosition.NONE) {
+            shoot();
+            drivetrain2.turn(180,1);
+       }
         dropWobbleGoal();
+        if(position == RingPosition.FOUR) {
+            park();
+        }
 
-        Mary.launcher.power(0.3, 0.3);
-        Mary.intake.in();
-        park();
-
-        shoot();
     }
 
     public void shoot() {
+        drivetrain2.straighten(180);
         sleep(2000);
 
         Mary.launcher.TeleShoot(1);
@@ -113,16 +112,20 @@ public class AutonomousParent extends EasyOpenCVExample {
                 break;
             case ONE: // B
                 drivetrain2.straighten(180);
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 2.5);
-                drivetrain2.move(DriveSensor.Sensor.RIGHT, DriveSensor.ReferenceDirection.TOWARDS, 60, 1);
+                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 2.45);
+//                drivetrain2.move(DriveSensor.Sensor.RIGHT, DriveSensor.ReferenceDirection.TOWARDS, 60, 1);
                 break;
             case NONE: // A
-                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 50, 1);
-                drivetrain2.straighten(-0);
-                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.TOWARDS,  200, 1);
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.5);
-                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.AWAY,  55, 1);
-                drivetrain2.straighten(0);
+                drivetrain2.straighten(180);
+                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 2.1);
+//                drivetrain2.move(DriveSensor.Sensor.RIGHT, DriveSensor.ReferenceDirection.TOWARDS, 60, 1);
+
+//                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 50, 1);
+//                drivetrain2.straighten(-0);
+//                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.TOWARDS,  200, 1);
+//                drivetrain.move(DriveAuto.MoveDirection.FORWARD, 1, 0.5);
+//                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.AWAY,  55, 1);
+//                drivetrain2.straighten(0);
                 break;
         }
     }
@@ -168,7 +171,7 @@ public class AutonomousParent extends EasyOpenCVExample {
         }
         drivetrain2.straighten(0);
         drivetrain2.move(DriveSensor.Sensor.FRONT, DriveSensor.ReferenceDirection.TOWARDS, 48, 1);
-        drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.AWAY, 65, 1);
+        drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.AWAY, 70, 1);
         // before turn
         // Front = 48cm
         // Left = 75
