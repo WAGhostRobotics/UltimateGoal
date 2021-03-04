@@ -19,6 +19,10 @@ public class Intake {
         belt.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
+    public void inBelt() {
+        belt.setPower(1);
+    }
+
     public void in() {
         intake.setPower(1);
         belt.setPower(1);

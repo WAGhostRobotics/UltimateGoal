@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.core.Mary;
 import org.firstinspires.ftc.teamcode.library.multimotors.MultiDcMotor;
 
+import static org.firstinspires.ftc.teamcode.core.Mary.hardwareMap;
+
 
 public class Launcher {
     // Launcher
@@ -57,6 +59,10 @@ public class Launcher {
     public void power(double power1, double power2) {
         launcher1.setPower(power1);
         launcher2.setPower(power2);
+    }
+
+    public double getVoltage() {
+        return hardwareMap.voltageSensor.get("l1").getVoltage();
     }
 
     public void shoot() {

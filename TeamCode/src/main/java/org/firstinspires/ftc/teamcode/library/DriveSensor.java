@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.core.Mary;
 
 import java.util.ArrayList;
 
+import static org.firstinspires.ftc.teamcode.core.Mary.imu;
 import static org.firstinspires.ftc.teamcode.core.Mary.sensors;
 
 //import org.firstinspires.ftc.teamcode.component.IMU;
@@ -104,27 +105,6 @@ public class DriveSensor {
         DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
     }
 
-    // specifically makes robot move forward and turn counterclockwise
-    public void moveAndTurn2(double degrees, double power) {
-        double curr_heading = Mary.imu.getHeading();
-        double new_heading = curr_heading + (degrees);
-
-        while(Math.abs(Mary.imu.getHeading() - new_heading) > 8) {
-            if(Mary.imu.getHeading() - new_heading < 0) {
-                DriveStyle.MecanumArcade(motors, power, 0,1,-1);
-            }
-            if(Mary.imu.getHeading() - new_heading > 0) {
-                DriveStyle.MecanumArcade(motors, power, 0,-1,1);
-            }
-        }
-        DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
-    }
-
-    public void around(double y) {
-        while(sensors.getBack() > y)
-        DriveStyle.MecanumArcade(motors, 1, -1, -1, 0);
-    }
-
     public void turn(int degrees, double power) {
         double curr_heading = Mary.imu.getHeading();
         double new_heading = curr_heading + (degrees);
@@ -139,9 +119,33 @@ public class DriveSensor {
         DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
     }
 
+    public void straighten(Direction direction) { // idk if it works
+        switch (direction) {
+            case BACKWARD: // 0
+                while(Math.abs(imu.getHeading()) > 10) {
+                    if(imu.getHeading() < 0) {
+                        DriveStyle.MecanumArcade(motors, -0.5, 0,0,1);
+                    } else {
+                        DriveStyle.MecanumArcade(motors, 0.5, 0,0,1);
+                    }
+                }
+                break;
+            case FORWARD: // 180/-180 NEEDS WORK
+                while(Math.abs(Math.abs(imu.getHeading()) - 180) > 10) {
+                    if(imu.getHeading() < 0) {
+                        DriveStyle.MecanumArcade(motors, 0.5, 0,0,1);
+                    } else {
+                        DriveStyle.MecanumArcade(motors, -0.5, 0,0,1);
+                    }
+                }
+                break;
+        }
+    }
+
     public void straighten(double heading) {
         double inc = 2;
-
+// Left positive
+//right negative
         if(heading < 0)  {
             heading += inc;
         } else if(heading > 0) {
@@ -182,6 +186,11 @@ public class DriveSensor {
         BACK,
         LEFT,
         RIGHT
+    }
+
+    public enum Direction {
+        FORWARD,
+        BACKWARD
     }
 
     public enum ReferenceDirection {
