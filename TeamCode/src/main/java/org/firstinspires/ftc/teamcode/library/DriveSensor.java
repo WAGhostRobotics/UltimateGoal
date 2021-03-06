@@ -122,16 +122,16 @@ public class DriveSensor {
     public void straighten(Direction direction) { // idk if it works
         switch (direction) {
             case BACKWARD: // 0
-                while(Math.abs(imu.getHeading()) > 10) {
+                while(Math.abs(imu.getHeading()) > 5) {
                     if(imu.getHeading() < 0) {
-                        DriveStyle.MecanumArcade(motors, -0.5, 0,0,1);
-                    } else {
                         DriveStyle.MecanumArcade(motors, 0.5, 0,0,1);
+                    } else {
+                        DriveStyle.MecanumArcade(motors, -0.5, 0,0,1);
                     }
                 }
                 break;
             case FORWARD: // 180/-180 NEEDS WORK
-                while(Math.abs(Math.abs(imu.getHeading()) - 180) > 10) {
+                while(Math.abs(Math.abs(imu.getHeading()) - 180) > 5) {
                     if(imu.getHeading() < 0) {
                         DriveStyle.MecanumArcade(motors, 0.5, 0,0,1);
                     } else {
