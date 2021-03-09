@@ -6,7 +6,6 @@ import org.firstinspires.ftc.teamcode.core.Mary;
 
 import java.util.ArrayList;
 
-import static org.firstinspires.ftc.teamcode.core.Mary.imu;
 import static org.firstinspires.ftc.teamcode.core.Mary.sensors;
 
 //import org.firstinspires.ftc.teamcode.component.IMU;
@@ -119,65 +118,57 @@ public class DriveSensor {
         DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
     }
 
-    public void straighten(Direction direction) { // idk if it works
-        switch (direction) {
-            case BACKWARD: // 0
-                while(Math.abs(imu.getHeading()) > 5) {
-                    if(imu.getHeading() < 0) {
-                        DriveStyle.MecanumArcade(motors, 0.5, 0,0,1);
-                    } else {
-                        DriveStyle.MecanumArcade(motors, -0.5, 0,0,1);
-                    }
-                }
-                break;
-            case FORWARD: // 180/-180 NEEDS WORK
-                while(Math.abs(Math.abs(imu.getHeading()) - 180) > 5) {
-                    if(imu.getHeading() < 0) {
-                        DriveStyle.MecanumArcade(motors, 0.5, 0,0,1);
-                    } else {
-                        DriveStyle.MecanumArcade(motors, -0.5, 0,0,1);
-                    }
-                }
-                break;
-        }
-    }
-
-    public void straighten(double heading) {
-        double inc = 2;
+    public void straighten(int heading) {
 // Left positive
 //right negative
-        if(heading < 0)  {
-            heading += inc;
-        } else if(heading > 0) {
-            heading -= inc;
+        switch(heading) {
+            case 0:
+                while(Math.abs(Mary.imu.getHeading()) > 3) {
+                    if(Mary.imu.getHeading() < 0) {
+                        DriveStyle.MecanumArcade(motors, -0.3, 0,0,1);
+                    } else {
+                        DriveStyle.MecanumArcade(motors, 0.3, 1,0,1);
+                    }
+                }
+                break;
+            case 180:
+                while(Math.abs(Math.abs(Mary.imu.getHeading()) - 180) > 3) {
+                    if(Mary.imu.getHeading() < 0) {
+                        DriveStyle.MecanumArcade(Mary.driveMotors, 0.3, 0, 0 ,1);
+                    } else {
+                        DriveStyle.MecanumArcade(Mary.driveMotors, -0.3, 0, 0 ,1);
+                    }
+                }
+                break;
         }
 
-        while(Math.abs(Mary.imu.getHeading() - heading) > 2) {
-            if(Mary.imu.getHeading() - heading < 0) {
-                DriveStyle.MecanumArcade(motors, -0.5, 0,0,1);
-            } else {
-                DriveStyle.MecanumArcade(motors, 0.5, 1,0,1);
-            }
-        }
         DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
     }
 
-    public void straighten(double heading, double power) {
-        double inc = 2;
-
-        if(heading < 0)  {
-            heading += inc;
-        } else if(heading > 0) {
-            heading -= inc;
+    public void straighten(int heading, double power) {
+// Left positive
+//right negative
+        switch(heading) {
+            case 0:
+                while(Math.abs(Mary.imu.getHeading()) > 3) {
+                    if(Mary.imu.getHeading() < 0) {
+                        DriveStyle.MecanumArcade(motors, -power, 0,0,1);
+                    } else {
+                        DriveStyle.MecanumArcade(motors, power, 1,0,1);
+                    }
+                }
+                break;
+            case 180:
+                while(Math.abs(Math.abs(Mary.imu.getHeading()) - 180) > 3) {
+                    if(Mary.imu.getHeading() < 0) {
+                        DriveStyle.MecanumArcade(Mary.driveMotors, power, 0, 0 ,1);
+                    } else {
+                        DriveStyle.MecanumArcade(Mary.driveMotors, -power, 0, 0 ,1);
+                    }
+                }
+                break;
         }
 
-        while(Math.abs(Mary.imu.getHeading() - heading) > 2) {
-            if(Mary.imu.getHeading() - heading < 0) {
-                DriveStyle.MecanumArcade(motors, -power, 0,0,1);
-            } else {
-                DriveStyle.MecanumArcade(motors, power, 1,0,1);
-            }
-        }
         DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
     }
 
