@@ -26,6 +26,9 @@ public class TeleOpParent extends LinearOpMode {
 
     // Wobble Claw variables
     private boolean up = false;
+    private long clawtime = 0;
+    private boolean moving = false;
+    private ClawMovement movement = ClawMovement.NONE;
 
     // Set default DriveType
     DriveStyle.DriveType type = DriveStyle.DriveType.MECANUMARCADE;
@@ -74,10 +77,13 @@ public class TeleOpParent extends LinearOpMode {
             // Launcher Wheels
             if (gamepad1.dpad_up || gamepad2.dpad_up) { // top power
                 Mary.launcher.power(0.9, 0.9);
+                Mary.intake.inBelt();
             } else if (gamepad1.dpad_down || gamepad2.dpad_down) { // middle power
                 Mary.launcher.power(0.7, 0.7);
+                Mary.intake.inBelt();
             } else {
                 Mary.launcher.stop();
+                Mary.intake.stop();
             }
             // Launcher Mover
 
@@ -111,22 +117,55 @@ public class TeleOpParent extends LinearOpMode {
             }
 
             if(gamepad1.dpad_right||gamepad2.dpad_right){
-                Mary.claw.out();
+                movement = ClawMovement.OUT;
+                clawtime = System.currentTimeMillis();
                 up = false;
             }
 
             if(gamepad1.dpad_left|| gamepad2.dpad_left){
-                Mary.claw.in();
+                movement = ClawMovement.IN;
+                clawtime = System.currentTimeMillis();
                 up = false;
             }
 
             if((gamepad1.left_stick_button|| gamepad2.left_stick_button) && !up){
-                Mary.claw.up();
+                movement = ClawMovement.UP;
+                clawtime = System.currentTimeMillis();
                 up = true;
+            }
+
+            if(movement != ClawMovement.NONE) {
+                if ((movement == ClawMovement.IN && Mary.claw.getPosition() == Mary.claw.IN) ||
+                        (movement == ClawMovement.OUT && Mary.claw.getPosition() == Mary.claw.OUT) ||
+                        (movement == ClawMovement.UP && Mary.claw.getPosition() == Mary.claw.UP))  {
+                        movement = ClawMovement.NONE;
+                }
+            }
+
+            if(System.currentTimeMillis() - clawtime > 10) {
+                if(movement == ClawMovement.IN) {  // doesnt work idk why
+                    Mary.claw.move(false);
+                } else if (movement == ClawMovement.OUT) {
+                    Mary.claw.move(true);
+                } else if (movement == ClawMovement.UP) {
+                    if(Mary.claw.getPosition() < Mary.claw.UP) {
+                         Mary.claw.move(true);
+                    } else {
+                        Mary.claw.move(false);
+                    }
+                }
+                clawtime = System.currentTimeMillis();
             }
 
             // Send diagnostics to user
             telemetry.addData("Status", "Running");
         }
+    }
+
+    private enum ClawMovement {
+        UP,
+        IN,
+        OUT,
+        NONE
     }
 }

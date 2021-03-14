@@ -11,9 +11,9 @@ public class Claw {
 
     private final static double GRAB = 0.04;
     private final static double RELEASE = 0.25;
-    private final static double IN = 0.40;
-    private final static double OUT= 1.00;
-    private final static double UP = 0.70;
+    public final static double IN = 0.35;
+    public final static double OUT= 1.00;
+    public final static double UP = 0.65;
     private final static double INTERVAL = 30;
 
     public void init(HardwareMap hardwareMap) {
@@ -77,5 +77,17 @@ public class Claw {
 //            }
 //        }
         lift.setPosition(UP);
+    }
+
+    public void move(boolean pos) {
+        if(pos) {
+            lift.setPosition(lift.getPosition() + 0.01);
+        } else {
+            lift.setPosition(lift.getPosition() - 0.01);
+        }
+    }
+
+    public double getPosition() {
+        return lift.getPosition();
     }
 }
