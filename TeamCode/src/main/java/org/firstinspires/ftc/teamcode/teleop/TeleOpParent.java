@@ -135,7 +135,7 @@ public class TeleOpParent extends LinearOpMode {
             }
 
             if(movement != ClawMovement.NONE) {
-                if ((movement == ClawMovement.IN && Mary.claw.getPosition() == Mary.claw.IN) ||
+                if ((movement == ClawMovement.IN && Mary.claw.getPosition() <= Mary.claw.IN) ||
                         (movement == ClawMovement.OUT && Mary.claw.getPosition() == Mary.claw.OUT) ||
                         (movement == ClawMovement.UP && Mary.claw.getPosition() == Mary.claw.UP))  {
                         movement = ClawMovement.NONE;
@@ -143,7 +143,7 @@ public class TeleOpParent extends LinearOpMode {
             }
 
             if(System.currentTimeMillis() - clawtime > 10) {
-                if(movement == ClawMovement.IN) {  // doesnt work idk why
+                if(movement == ClawMovement.IN) {
                     Mary.claw.move(false);
                 } else if (movement == ClawMovement.OUT) {
                     Mary.claw.move(true);

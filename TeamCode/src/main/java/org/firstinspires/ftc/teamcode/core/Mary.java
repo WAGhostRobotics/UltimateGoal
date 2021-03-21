@@ -53,7 +53,7 @@ public class Mary {
         // Flip the values to change the direction the robot "faces"
         // The motors turn counterclockwise looking at them head on for FORWARD; set the right ones to reverse for correct operation
         dFrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        dFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        dFrontRight.setDirection(DcMotorSimple.Direction.FORWARD); // NOT FINAL FIX
         dBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         dBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -64,10 +64,10 @@ public class Mary {
         dBackRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 //        // set to use encoders (can use for specific speed or distance)
-        dFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        dFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        dBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        dBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        dFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        dFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        dBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        dBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Adds the motors to a motor array for easier reference
         // The order here must match the order used in {@link DriveStyle}
