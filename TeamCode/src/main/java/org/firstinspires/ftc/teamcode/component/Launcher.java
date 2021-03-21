@@ -43,19 +43,6 @@ public class Launcher {
 //        launcherMotors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
-//    public void power(double power) {
-//        launcherMotors.setPower(power);
-//        Kevin.sleep(500);
-//        mover.setPower(1);
-//        Kevin.sleep(TIME);
-//        mover.setPower(0.0);
-//        Kevin.sleep(100);
-//        mover.setPower(-1);
-//        Kevin.sleep(TIME);
-//        mover.setPower(0);
-//        launcherMotors.setPower(0);
-//    }
-
     public void power(double power1, double power2) {
         launcher1.setPower(power1);
         launcher2.setPower(power2);
