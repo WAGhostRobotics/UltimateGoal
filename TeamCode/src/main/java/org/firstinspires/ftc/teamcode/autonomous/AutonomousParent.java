@@ -94,7 +94,7 @@ public class AutonomousParent extends EasyOpenCVExample {
                 if(Mary.sensors.getBack() < 140) {
                     drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.AWAY,  200, POWER);
                 }
-                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, POWER, 0.45); //
+                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, POWER, 0.6); //
                 drivetrain2.move(DriveSensor.Sensor.RIGHT, DriveSensor.ReferenceDirection.AWAY, 70, POWER);
                 break;
         }
@@ -127,7 +127,7 @@ public class AutonomousParent extends EasyOpenCVExample {
             case NONE: // A
                 drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 50, POWER);
                 drivetrain2.straighten(-0);
-                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, POWER, 1.35); //
+                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, POWER, 1.47); //1.42
 //                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.TOWARDS, 195, POWER);
 //                if(Mary.sensors.getFront() < 200) {
 //                    telemetry.addData("WALL: ", Mary.sensors.getFront());
@@ -211,7 +211,7 @@ public class AutonomousParent extends EasyOpenCVExample {
                 break;
             case NONE:
                 powerShot(3);
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, POWER, 0.26); //
+                drivetrain.move(DriveAuto.MoveDirection.FORWARD, POWER, 0.30); //
                 drivetrain2.move(DriveSensor.Sensor.RIGHT, DriveSensor.ReferenceDirection.TOWARDS, 70, POWER);
                 drivetrain.turn(DriveAuto.TurnDirection.LEFT, POWER, 1);
                 Mary.claw.out();
@@ -237,13 +237,13 @@ public class AutonomousParent extends EasyOpenCVExample {
         drivetrain2.straighten(180);
         sleep(100);
         if(times > 1) {
-            drivetrain.turn(DriveAuto.TurnDirection.LEFT, 0.43, 0.2);
+            drivetrain.turn(DriveAuto.TurnDirection.LEFT, 0.43, 0.24);
         } else {
             drivetrain.turn(DriveAuto.TurnDirection.LEFT, 0.43, 0.15);
         }
         for(int i = 0; i < times; i++) {
             if(i != 0) {
-                drivetrain.turn(DriveAuto.TurnDirection.RIGHT, 0.25, 0.08);
+                drivetrain.turn(DriveAuto.TurnDirection.RIGHT, 0.25, 0.12);
             }
             shoot(1);
             if(times != 1)
