@@ -150,23 +150,32 @@ public class DriveSensor {
 //right negative
         switch(heading) {
             case 0:
-                while(Math.abs(Mary.imu.getHeading()) > 3) {
-                    if(Mary.imu.getHeading() < 0) {
-                        DriveStyle.MecanumArcade(motors, -power, 0,0,1);
+                while (Math.abs(Mary.imu.getHeading()) > 6.5) {//5
+                    if (Mary.imu.getHeading() < 0) {
+                        DriveStyle.MecanumArcade(motors, -power, 0, 0, 1);
                     } else {
-                        DriveStyle.MecanumArcade(motors, power, 1,0,1);
+                        DriveStyle.MecanumArcade(motors, power, 1, 0, 1);
                     }
                 }
                 break;
             case 180:
-                while(Math.abs(Math.abs(Mary.imu.getHeading()) - 180) > 3) {
-                    if(Mary.imu.getHeading() < 0) {
-                        DriveStyle.MecanumArcade(Mary.driveMotors, power, 0, 0 ,1);
+                while (Math.abs(Math.abs(Mary.imu.getHeading()) - 180) > 6.5) {//5
+                    if (Mary.imu.getHeading() < 0) {
+                        DriveStyle.MecanumArcade(Mary.driveMotors, power, 0, 0, 1);
                     } else {
-                        DriveStyle.MecanumArcade(Mary.driveMotors, -power, 0, 0 ,1);
+                        DriveStyle.MecanumArcade(Mary.driveMotors, -power, 0, 0, 1);
                     }
                 }
                 break;
+            case 90:
+                while(Mary.imu.getHeading() - 90 > 3) {
+                if(Mary.imu.getHeading() < 90 &&  Mary.imu.getHeading() > -90) {
+                    DriveStyle.MecanumArcade(Mary.driveMotors, power, 0, 0 ,1);
+                } else {
+                    DriveStyle.MecanumArcade(Mary.driveMotors, -power, 0, 0 ,1);
+                }
+                break;
+                }
         }
 
         DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
