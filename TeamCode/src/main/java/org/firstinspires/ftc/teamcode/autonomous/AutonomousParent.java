@@ -89,7 +89,7 @@ public class AutonomousParent extends EasyOpenCVExample {
                 dropWobbleGoal(true);
                 break;
             case ONE: // B
-                drivetrain.move(DriveAuto.MoveDirection.FORWARD, POWER2, 0.82); //1.0
+                drivetrain.move(DriveAuto.MoveDirection.FORWARD, POWER2, 0.83); //0.9
                 drivetrain2.move(DriveSensor.Sensor.RIGHT, DriveSensor.ReferenceDirection.AWAY, 70, POWER);
                 break;
             case NONE: // A
@@ -115,18 +115,18 @@ public class AutonomousParent extends EasyOpenCVExample {
                 drivetrain2.straighten(0);
                 break;
             case ONE: // B
-                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 34, POWER);//40
+                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 37, POWER);//40
                 drivetrain2.straighten(0);
                 drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.TOWARDS, 200, POWER2);
                 if(Mary.sensors.getFront() < 200) {
                     drivetrain2.move(DriveSensor.Sensor.FRONT, DriveSensor.ReferenceDirection.AWAY, 200, POWER2);
-                    drivetrain.move(DriveAuto.MoveDirection.BACKWARD, POWER2, 0.46); //.4
+                    drivetrain.move(DriveAuto.MoveDirection.BACKWARD, POWER2, 0.2); //.4
                 } else {
                     drivetrain.move(DriveAuto.MoveDirection.FORWARD, POWER2, 0.49); //.43
                 }
                 Mary.claw.out();
                 drivetrain2.straighten(0);
-                drivetrain2.moveAndTurn(85, 0.59);//90  POWER
+                drivetrain2.moveAndTurn(77, 0.59);//85  POWER
                 break;
             case NONE: // A
                 drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 50, POWER);
@@ -152,7 +152,7 @@ public class AutonomousParent extends EasyOpenCVExample {
     public void dropWobbleGoal(boolean wait) {
         Mary.claw.out();
         if(wait) {
-            sleep(800);
+            sleep(1000);//800
         }
 
         Mary.claw.release();
@@ -162,7 +162,7 @@ public class AutonomousParent extends EasyOpenCVExample {
 
     public void goToSecondWobbleGoal() {
         if(position == RingPosition.ONE) {
-            drivetrain2.moveAndTurn(-90, POWER);
+            drivetrain2.moveAndTurn(-77, 0.59);
         } else if(position == RingPosition.FOUR) {
             drivetrain.move(DriveAuto.MoveDirection.FORWARD, POWER, 0.48); //
             drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 30, POWER);
@@ -208,11 +208,13 @@ public class AutonomousParent extends EasyOpenCVExample {
             case ONE:
                 powerShot(3);
                 Mary.intake.in();
-                drivetrain2.turn(180, 0.8);
+
+                //doesn't pick up the second ring, turns weird
+                drivetrain.turn(DriveAuto.TurnDirection.RIGHT, POWER, 0.5);
                 drivetrain2.straighten(0);
                 drivetrain.move(DriveAuto.MoveDirection.BACKWARD, POWER2, 0.3);
-                drivetrain.turn(DriveAuto.TurnDirection.LEFT, POWER2, 0.60);
-                drivetrain.move(DriveAuto.MoveDirection.LEFT, POWER2, 0.32);
+                drivetrain.turn(DriveAuto.TurnDirection.LEFT, POWER2, 0.4);//.48
+                drivetrain.move(DriveAuto.MoveDirection.LEFT, POWER2, 0.15);
 //                drivetrain.move(DriveAuto.MoveDirection.FORWARD, POWER2, 0.42); //
 //                drivetrain.turn(DriveAuto.TurnDirection.RIGHT, POWER2, .60); //.55
 //                drivetrain.move(DriveAuto.MoveDirection.FORWARD, POWER2, 0.12); //
@@ -246,16 +248,16 @@ public class AutonomousParent extends EasyOpenCVExample {
 //        } else {
 //            Mary.launcher.power(0.7, .65);
 //        }
-        drivetrain2.straighten(180);
+        drivetrain2.straighten(180, 0.5);
         sleep(100);
         if(times > 1) {
-            drivetrain.turn(DriveAuto.TurnDirection.LEFT, 0.43, 0.28);
+            drivetrain.turn(DriveAuto.TurnDirection.LEFT, 0.43, 0.17);//.23
         } else {
             drivetrain.turn(DriveAuto.TurnDirection.LEFT, 0.43, 0.15);
         }
         for(int i = 0; i < times; i++) {
             if(i == 1) {
-                drivetrain.turn(DriveAuto.TurnDirection.RIGHT, 0.26, 0.10);//.25
+                drivetrain.turn(DriveAuto.TurnDirection.RIGHT, 0.28, 0.10);//.26
             } else if(i == 2) {
                 drivetrain.turn(DriveAuto.TurnDirection.RIGHT, 0.26, 0.12);//.25
             }
