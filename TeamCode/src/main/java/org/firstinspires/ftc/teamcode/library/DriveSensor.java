@@ -123,20 +123,20 @@ public class DriveSensor {
 //right negative
         switch(heading) {
             case 0:
-                while(Math.abs(Mary.imu.getHeading()) > 3) {
+                while(Math.abs(Mary.imu.getHeading()) > 2) {
                     if(Mary.imu.getHeading() < 0) {
-                        DriveStyle.MecanumArcade(motors, -0.3, 0,0,1);
+                        DriveStyle.MecanumArcade(motors, -0.17, 0,0,1);
                     } else {
-                        DriveStyle.MecanumArcade(motors, 0.3, 1,0,1);
+                        DriveStyle.MecanumArcade(motors, 0.17, 1,0,1);
                     }
                 }
                 break;
             case 180:
-                while(Math.abs(Math.abs(Mary.imu.getHeading()) - 180) > 3) {
+                while(Math.abs(Math.abs(Mary.imu.getHeading()) - 180) > 2) {
                     if(Mary.imu.getHeading() < 0) {
-                        DriveStyle.MecanumArcade(Mary.driveMotors, 0.3, 0, 0 ,1);
+                        DriveStyle.MecanumArcade(Mary.driveMotors, 0.17, 0, 0 ,1);
                     } else {
-                        DriveStyle.MecanumArcade(Mary.driveMotors, -0.3, 0, 0 ,1);
+                        DriveStyle.MecanumArcade(Mary.driveMotors, -0.17, 0, 0 ,1);
                     }
                 }
                 break;
