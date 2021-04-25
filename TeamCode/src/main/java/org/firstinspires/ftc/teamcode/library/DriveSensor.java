@@ -150,7 +150,7 @@ public class DriveSensor {
 //right negative
         switch(heading) {
             case 0:
-                while (Math.abs(Mary.imu.getHeading()) > 6.5) {//5
+                while (Math.abs(Mary.imu.getHeading()) > 3) {//5
                     if (Mary.imu.getHeading() < 0) {
                         DriveStyle.MecanumArcade(motors, -power, 0, 0, 1);
                     } else {
@@ -159,7 +159,7 @@ public class DriveSensor {
                 }
                 break;
             case 180:
-                while (Math.abs(Math.abs(Mary.imu.getHeading()) - 180) > 6.5) {//5
+                while (Math.abs(Math.abs(Mary.imu.getHeading()) - 180) > 3) {//5
                     if (Mary.imu.getHeading() < 0) {
                         DriveStyle.MecanumArcade(Mary.driveMotors, power, 0, 0, 1);
                     } else {
