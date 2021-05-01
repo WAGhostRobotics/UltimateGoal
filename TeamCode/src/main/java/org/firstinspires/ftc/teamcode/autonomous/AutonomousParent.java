@@ -79,7 +79,7 @@ public class AutonomousParent extends EasyOpenCVExample {
         switch(position) {
             case FOUR: // C
                 drivetrain2.straighten(180, 0.2);
-                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.AWAY, 169, POWER);
+                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.AWAY, 171, POWER);
 
                 drivetrain2.straighten(180);
                 powerShot2();
@@ -91,7 +91,7 @@ public class AutonomousParent extends EasyOpenCVExample {
                 break;
             case ONE: // B
                 drivetrain2.straighten(180, 0.2);
-                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.AWAY, 169, POWER);
+                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.AWAY, 171, POWER);
                 drivetrain2.straighten(180, STRAIGHTEN_POWER);
                 break;
             case NONE: // A
@@ -105,7 +105,7 @@ public class AutonomousParent extends EasyOpenCVExample {
 //                drivetrain2.move(DriveSensor.Sensor.RIGHT, DriveSensor.ReferenceDirection.AWAY, 70, POWER);
 
 
-                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.AWAY, 169, POWER);//160
+                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.AWAY, 171, POWER);//160
                 drivetrain2.straighten(180, STRAIGHTEN_POWER);
                 break;
         }
