@@ -14,6 +14,34 @@ public class DriveAuto {
         this.motors = motors;
     }
 
+    public void moveToPosition(MoveDirection direction, double power, int ticks) { // THIS IS STUPID DO NOT USE
+        for(int i = 0; i < 4; i++) {
+            motors.get(i).setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motors.get(i).setTargetPosition(ticks);
+        }
+
+
+        for(int i = 0; i < 4; i++) {
+            motors.get(i).setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+
+        for(int i = 0; i < 4; i++) {
+            motors.get(0).setPower(power);
+        }
+
+        while(motors.get(0).isBusy() || motors.get(1).isBusy() || motors.get(2).isBusy()  || motors.get(3).isBusy()) {
+            // wait!
+        }
+
+        for(int i = 0; i < 4; i++) {
+            motors.get(0).setPower(0);
+        }
+
+        for(int i = 0; i < 4; i++) {
+            motors.get(i).setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+    }
+
     public void move(MoveDirection direction, double power, double seconds) {
         switch (direction) {
             case FORWARD:

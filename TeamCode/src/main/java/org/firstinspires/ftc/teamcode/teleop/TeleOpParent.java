@@ -32,6 +32,7 @@ public class TeleOpParent extends LinearOpMode {
 
     // Set default DriveType
     DriveStyle.DriveType type = DriveStyle.DriveType.MECANUMARCADE;
+    Boolean slow = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -59,15 +60,15 @@ public class TeleOpParent extends LinearOpMode {
             */
 
             // Drivie using set drivemode (g1.ls/rs, g1.lb/rb)
-            DriveStyle.driveWithType(Mary.driveMotors, gamepad2, type);
+            DriveStyle.driveWithType(Mary.driveMotors, gamepad2, type, slow);
 
             // Wobble Goal Claw
 
 
             // Conveyor Belt on/off in/out
-            if (gamepad1.a || gamepad2.a) {
+            if (gamepad1.a || gamepad2.a && !slow) {
                 Mary.intake.in();
-            } else if (gamepad1.b || gamepad2.b) {
+            } else if (gamepad1.b || gamepad2.b && !slow) {
                 Mary.intake.out();
             } else {
                 Mary.intake.stop();
@@ -75,10 +76,10 @@ public class TeleOpParent extends LinearOpMode {
 
             // Launcher
             // Launcher Wheels
-            if (gamepad1.dpad_up || gamepad2.dpad_up) { // top power
-                Mary.launcher.power(0.9, 0.9);
+            if (gamepad1.dpad_up || gamepad2.dpad_up && !slow) { // top power
+                Mary.launcher.power(0.97, 0.97);
                 Mary.intake.inBelt();
-            } else if (gamepad1.dpad_down || gamepad2.dpad_down) { // middle power
+            } else if (gamepad1.dpad_down || gamepad2.dpad_down && !slow) { // middle power
                 Mary.launcher.power(0.7, 0.7);
                 Mary.intake.inBelt();
             } else {
@@ -87,7 +88,7 @@ public class TeleOpParent extends LinearOpMode {
             }
             // Launcher Mover
 
-            if(gamepad1.y || gamepad2.y) {
+            if(gamepad1.y || gamepad2.y && !slow) {
                 servotime = System.currentTimeMillis();
                 Mary.launcher.TeleShoot(1);
                 hasRun = false;
@@ -108,27 +109,27 @@ public class TeleOpParent extends LinearOpMode {
             }
 
             // Wobble Claw
-            if(gamepad1.left_bumper||gamepad2.left_bumper){
+            if(gamepad1.left_bumper||gamepad2.left_bumper && !slow){
                 Mary.claw.grab();
             }
 
-            if(gamepad1.right_bumper||gamepad2.right_bumper){
+            if(gamepad1.right_bumper||gamepad2.right_bumper && !slow){
                 Mary.claw.release();
             }
 
-            if(gamepad1.dpad_right||gamepad2.dpad_right){
+            if(gamepad1.dpad_right||gamepad2.dpad_right && !slow){
                 movement = ClawMovement.OUT;
                 clawtime = System.currentTimeMillis();
                 up = false;
             }
 
-            if(gamepad1.dpad_left|| gamepad2.dpad_left){
+            if(gamepad1.dpad_left|| gamepad2.dpad_left && !slow){
                 movement = ClawMovement.IN;
                 clawtime = System.currentTimeMillis();
                 up = false;
             }
 
-            if((gamepad1.left_stick_button|| gamepad2.left_stick_button) && !up){
+            if((gamepad1.left_stick_button|| gamepad2.left_stick_button && !slow) && !up){
                 movement = ClawMovement.UP;
                 clawtime = System.currentTimeMillis();
                 up = true;

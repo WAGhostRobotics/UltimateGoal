@@ -11,6 +11,8 @@ public class AutonomousParent extends EasyOpenCVExample {
     StartLocation startLocation = StartLocation.OUTSIDE;
     TeamColor teamColor = TeamColor.RED;
     RingPosition position = RingPosition.ONE;
+    RingPosition givenPos = RingPosition.NONE;
+    boolean scan = true;
     final double POWER = 0.7;
     final double POWER2 = 0.8;
     final double STRAIGHTEN_POWER = 0.30;
@@ -43,6 +45,9 @@ public class AutonomousParent extends EasyOpenCVExample {
             telemetry.addData("Last Position: ", position);
         }
 
+        if(!scan) {
+            position = givenPos;
+        }
 
         moveToDrop1(); // need to speed up this step
 
@@ -104,7 +109,6 @@ public class AutonomousParent extends EasyOpenCVExample {
 //                drivetrain.move(DriveAuto.MoveDirection.BACKWARD, POWER, 0.6); //
 //                drivetrain2.move(DriveSensor.Sensor.RIGHT, DriveSensor.ReferenceDirection.AWAY, 70, POWER);
 
-
                 drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.AWAY, 100, POWER);//163                drivetrain2.straighten(180, STRAIGHTEN_POWER);
                 drivetrain.move(DriveAuto.MoveDirection.FORWARD, 0.5, 0.3);
                 break;
@@ -137,7 +141,7 @@ public class AutonomousParent extends EasyOpenCVExample {
                 drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 50, POWER);//50
                 drivetrain2.straighten(0, STRAIGHTEN_POWER);
                 drivetrain.move(DriveAuto.MoveDirection.BACKWARD, POWER, 1.8); //1.47
-                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.AWAY, 20, 0.35);
+                drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.AWAY, 35, 0.35);
 //                drivetrain2.move(DriveSensor.Sensor.BACK, DriveSensor.ReferenceDirection.TOWARDS, 195, POWER);
 //                if(Mary.sensors.getFront() < 200) {
 //                    telemetry.addData("WALL: ", Mary.sensors.getFront());
@@ -249,12 +253,12 @@ public class AutonomousParent extends EasyOpenCVExample {
     }
 
     public void powerShot2(){
-        Mary.launcher.power(0.7, .7);
+        Mary.launcher.power(.9, .9);
 
 //        drivetrain.move(DriveAuto.MoveDirection.LEFT, 0.7, 0.25);
 
         Mary.intake.inBelt();
-        drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 59, 0.6);
+        drivetrain2.move(DriveSensor.Sensor.LEFT, DriveSensor.ReferenceDirection.TOWARDS, 62, 0.6);
         drivetrain2.straighten(180, 0.19);//.1
         Mary.intake.stop();
         shoot(1);

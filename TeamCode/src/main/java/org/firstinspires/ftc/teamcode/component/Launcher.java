@@ -29,10 +29,8 @@ public class Launcher {
         launcher2 = hardwareMap.get(DcMotor.class, "l2");
         mover = hardwareMap.get(Servo.class, "m");
 
-        launcher1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        launcher2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-
+//        launcher1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        launcher2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
         launcher2.setDirection(DcMotorSimple.Direction.FORWARD);

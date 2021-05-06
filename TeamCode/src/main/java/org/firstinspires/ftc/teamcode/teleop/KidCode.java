@@ -4,13 +4,13 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.library.DriveStyle;
 
-@TeleOp(name = "MecanumArcade TeleOp", group = "competition")
-public class MecanumArcadeTeleOp extends TeleOpParent {
+@TeleOp(name = "Presentation Code", group = "competition")
+public class KidCode extends TeleOpParent {
 
     @Override
     public void runOpMode() throws InterruptedException {
         super.type = DriveStyle.DriveType.MECANUMARCADE;
-        super.slow = false;
+        super.slow = true;
         super.runOpMode();
     }
 }
