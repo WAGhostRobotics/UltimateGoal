@@ -32,7 +32,8 @@ public class TeleOpParent extends LinearOpMode {
 
     // Set default DriveType
     DriveStyle.DriveType type = DriveStyle.DriveType.MECANUMARCADE;
-    Boolean slow = false;
+    double slow = 1.0;
+    Boolean kid = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -66,9 +67,9 @@ public class TeleOpParent extends LinearOpMode {
 
 
             // Conveyor Belt on/off in/out
-            if (gamepad1.a || gamepad2.a && !slow) {
+            if (gamepad1.a || gamepad2.a && !kid) {
                 Mary.intake.in();
-            } else if (gamepad1.b || gamepad2.b && !slow) {
+            } else if (gamepad1.b || gamepad2.b && !kid) {
                 Mary.intake.out();
             } else {
                 Mary.intake.stop();
@@ -76,11 +77,11 @@ public class TeleOpParent extends LinearOpMode {
 
             // Launcher
             // Launcher Wheels
-            if (gamepad1.dpad_up || gamepad2.dpad_up && !slow) { // top power
-                Mary.launcher.power(0.97, 0.97);
+            if (gamepad1.dpad_up || gamepad2.dpad_up && !kid) { // top power
+                Mary.launcher.power(0.9, 0.9);
                 Mary.intake.inBelt();
-            } else if (gamepad1.dpad_down || gamepad2.dpad_down && !slow) { // middle power
-                Mary.launcher.power(0.7, 0.7);
+            } else if (gamepad1.dpad_down || gamepad2.dpad_down && !kid) { // middle power
+                Mary.launcher.power(0.85, 0.85);
                 Mary.intake.inBelt();
             } else {
                 Mary.launcher.stop();
@@ -88,7 +89,7 @@ public class TeleOpParent extends LinearOpMode {
             }
             // Launcher Mover
 
-            if(gamepad1.y || gamepad2.y && !slow) {
+            if(gamepad1.y || gamepad2.y && !kid) {
                 servotime = System.currentTimeMillis();
                 Mary.launcher.TeleShoot(1);
                 hasRun = false;
@@ -109,27 +110,27 @@ public class TeleOpParent extends LinearOpMode {
             }
 
             // Wobble Claw
-            if(gamepad1.left_bumper||gamepad2.left_bumper && !slow){
+            if(gamepad1.left_bumper||gamepad2.left_bumper && !kid){
                 Mary.claw.grab();
             }
 
-            if(gamepad1.right_bumper||gamepad2.right_bumper && !slow){
+            if(gamepad1.right_bumper||gamepad2.right_bumper && !kid){
                 Mary.claw.release();
             }
 
-            if(gamepad1.dpad_right||gamepad2.dpad_right && !slow){
+            if(gamepad1.dpad_right||gamepad2.dpad_right && !kid){
                 movement = ClawMovement.OUT;
                 clawtime = System.currentTimeMillis();
                 up = false;
             }
 
-            if(gamepad1.dpad_left|| gamepad2.dpad_left && !slow){
+            if(gamepad1.dpad_left|| gamepad2.dpad_left && !kid){
                 movement = ClawMovement.IN;
                 clawtime = System.currentTimeMillis();
                 up = false;
             }
 
-            if((gamepad1.left_stick_button|| gamepad2.left_stick_button && !slow) && !up){
+            if((gamepad1.left_stick_button|| gamepad2.left_stick_button && !kid) && !up){
                 movement = ClawMovement.UP;
                 clawtime = System.currentTimeMillis();
                 up = true;

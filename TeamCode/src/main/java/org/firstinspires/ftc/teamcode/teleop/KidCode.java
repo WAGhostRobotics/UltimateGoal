@@ -10,7 +10,8 @@ public class KidCode extends TeleOpParent {
     @Override
     public void runOpMode() throws InterruptedException {
         super.type = DriveStyle.DriveType.MECANUMARCADE;
-        super.slow = true;
+        super.kid = true;
+        super.slow = 0.5;
         super.runOpMode();
     }
 }

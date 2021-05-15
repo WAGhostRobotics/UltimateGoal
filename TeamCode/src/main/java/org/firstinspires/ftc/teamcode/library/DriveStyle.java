@@ -44,12 +44,8 @@ public class DriveStyle {
      * @param motors  array of motors [lf, lb, rf, rb]
      * @param gamepad the gamepad to control the robot with (gamepad1/gamepad2)
      */
-    public static void MecanumArcade(ArrayList<DcMotor> motors, Gamepad gamepad, boolean slow) {
-        if(slow) {
-            MecanumArcade(motors, gear(gamepad), gamepad.left_stick_x/2, -gamepad.left_stick_y/2, gamepad.right_stick_x/2);
-        } else {
-            MecanumArcade(motors, gear(gamepad), gamepad.left_stick_x, -gamepad.left_stick_y, gamepad.right_stick_x);
-        }
+    public static void MecanumArcade(ArrayList<DcMotor> motors, Gamepad gamepad, double slow) {
+        MecanumArcade(motors, gear(gamepad), gamepad.left_stick_x*slow, -gamepad.left_stick_y*slow, gamepad.right_stick_x*slow);
     }
 
     /**
@@ -89,7 +85,7 @@ public class DriveStyle {
         motors.get(3).setPower(0);
     }
 
-    public static void driveWithType(ArrayList<DcMotor> motors, Gamepad gamepad, DriveType type, boolean slow) {
+    public static void driveWithType(ArrayList<DcMotor> motors, Gamepad gamepad, DriveType type, double slow) {
         switch (type) {
             case TANK:
                 Tank(motors, gamepad);
