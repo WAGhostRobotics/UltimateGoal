@@ -15,7 +15,7 @@ public class Wall {
         wall = hardwareMap.get(Servo.class, "wall");
         wall.setDirection(Servo.Direction.FORWARD);
 
-        up();
+        wall.setPosition(0);
     }
 
     public void up() {

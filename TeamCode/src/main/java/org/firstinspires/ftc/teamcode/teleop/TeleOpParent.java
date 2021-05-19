@@ -78,10 +78,10 @@ public class TeleOpParent extends LinearOpMode {
             // Launcher
             // Launcher Wheels
             if (gamepad1.dpad_up || gamepad2.dpad_up && !kid) { // top power
-                Mary.launcher.power(0.9, 0.9);
+                Mary.launcher.power(0.87, 0.87);
                 Mary.intake.inBelt();
             } else if (gamepad1.dpad_down || gamepad2.dpad_down && !kid) { // middle power
-                Mary.launcher.power(0.85, 0.85);
+                Mary.launcher.power(0.8, 0.8);
                 Mary.intake.inBelt();
             } else {
                 Mary.launcher.stop();
@@ -143,7 +143,7 @@ public class TeleOpParent extends LinearOpMode {
             if(gamepad1.right_trigger >= 0.1 || gamepad2.right_trigger >= 0.1) {
                 Mary.wall.down();
             }
-            if(gamepad2.left_trigger >= 0.1 || gamepad2.left_trigger >= 0.1) {
+            if(gamepad1.left_trigger >= 0.1 || gamepad2.left_trigger >= 0.1) {
                 Mary.wall.up();
             }
 

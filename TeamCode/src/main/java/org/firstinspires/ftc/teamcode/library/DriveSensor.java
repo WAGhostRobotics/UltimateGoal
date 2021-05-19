@@ -15,6 +15,7 @@ public class DriveSensor {
     private ArrayList<DcMotor> motors;
 //    private Sensors sensors;
 //    private IMU imu;
+    private boolean secondTime = false;
 
     public DriveSensor(ArrayList<DcMotor> motors) {
         this.motors = motors;
@@ -121,28 +122,37 @@ public class DriveSensor {
     public void straighten(int heading) {
 // Left positive
 //right negative
+        final double POWER = 0.08;
         switch(heading) {
             case 0:
-                while(Math.abs(Mary.imu.getHeading()) > 2) {
+                while(Math.abs(Mary.imu.getHeading()) > 0.5) {
                     if(Mary.imu.getHeading() < 0) {
-                        DriveStyle.MecanumArcade(motors, -0.17, 0,0,1);
+                        DriveStyle.MecanumArcade(motors, -POWER, 0,0,1);
                     } else {
-                        DriveStyle.MecanumArcade(motors, 0.17, 1,0,1);
+                        DriveStyle.MecanumArcade(motors, POWER, 1,0,1);
                     }
                 }
                 break;
             case 180:
-                while(Math.abs(Math.abs(Mary.imu.getHeading()) - 180) > 2) {
+                while(Math.abs(Math.abs(Mary.imu.getHeading()) - 180) > 0.5) {
                     if(Mary.imu.getHeading() < 0) {
-                        DriveStyle.MecanumArcade(Mary.driveMotors, 0.17, 0, 0 ,1);
+                        DriveStyle.MecanumArcade(Mary.driveMotors, POWER, 0, 0 ,1);
                     } else {
-                        DriveStyle.MecanumArcade(Mary.driveMotors, -0.17, 0, 0 ,1);
+                        DriveStyle.MecanumArcade(Mary.driveMotors, -POWER, 0, 0 ,1);
                     }
                 }
                 break;
         }
 
         DriveStyle.MecanumArcade(motors, 0, 0, 0 ,0);
+
+//        if(!secondTime) {
+//            straighten(heading);
+//            secondTime = true;
+//        } else {
+//            secondTime = false;
+//
+//        }
     }
 
     public void straighten(int heading, double power) {
