@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.component.IMU;
 import org.firstinspires.ftc.teamcode.component.Intake;
 import org.firstinspires.ftc.teamcode.component.Launcher;
 import org.firstinspires.ftc.teamcode.component.Sensors;
+import org.firstinspires.ftc.teamcode.component.Wall;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,9 @@ public class Mary {
 
     // Launcher
     public static Launcher launcher;
+
+    // Wall
+    public static Wall wall;
 
     // Sensors
     public static Sensors sensors;
@@ -85,6 +89,9 @@ public class Mary {
         // Launcher
         launcher = new Launcher();
 
+        // Wall
+        wall = new Wall();
+
         // Sensors
         sensors = new Sensors();
 
@@ -94,6 +101,7 @@ public class Mary {
         intake.init(hardwareMap);
         launcher.init(hardwareMap);
         claw.init(hardwareMap);
+        wall.init(hardwareMap);
         sensors.init();
         imu.init();
     }

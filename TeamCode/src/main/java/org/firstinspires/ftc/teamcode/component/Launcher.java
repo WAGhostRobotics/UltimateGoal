@@ -33,7 +33,7 @@ public class Launcher {
 //        launcher2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         launcher1.setDirection(DcMotorSimple.Direction.FORWARD);
-        launcher2.setDirection(DcMotorSimple.Direction.FORWARD);
+        launcher2.setDirection(DcMotorSimple.Direction.REVERSE);
         mover.setDirection(Servo.Direction.REVERSE);
 
         launcherMotors = new MultiDcMotor(launcher1, launcher2);

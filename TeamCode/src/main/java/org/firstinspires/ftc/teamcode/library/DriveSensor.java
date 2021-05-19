@@ -22,7 +22,7 @@ public class DriveSensor {
 //        this.imu = imu;
     }
 
-    public void move(Sensor direction, ReferenceDirection reference, int distance, double power) {
+    public void move(Sensor direction, ReferenceDirection reference, double distance, double power) {
         switch(direction) {
             case FRONT:
                 switch(reference) {

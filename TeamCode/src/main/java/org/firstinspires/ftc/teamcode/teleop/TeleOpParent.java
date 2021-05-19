@@ -89,14 +89,14 @@ public class TeleOpParent extends LinearOpMode {
             }
             // Launcher Mover
 
-            if(gamepad1.y || gamepad2.y && !kid) {
+            if (gamepad1.y || gamepad2.y && !kid) {
                 servotime = System.currentTimeMillis();
                 Mary.launcher.TeleShoot(1);
                 hasRun = false;
 
             }
 
-            if(!hasRun && System.currentTimeMillis() - servotime > 200) {
+            if (!hasRun && System.currentTimeMillis() - servotime > 200) {
                 Mary.launcher.TeleShoot(0);
                 Mary.intake.in();
                 ringtime = System.currentTimeMillis();
@@ -104,64 +104,76 @@ public class TeleOpParent extends LinearOpMode {
                 hasRun2 = false;
             }
 
-            if(!hasRun2 && System.currentTimeMillis() - ringtime > 100) {
+            if (!hasRun2 && System.currentTimeMillis() - ringtime > 100) {
                 Mary.intake.stop();
                 hasRun2 = true;
             }
 
             // Wobble Claw
-            if(gamepad1.left_bumper||gamepad2.left_bumper && !kid){
+            if (gamepad1.left_bumper || gamepad2.left_bumper && !kid) {
                 Mary.claw.grab();
             }
 
-            if(gamepad1.right_bumper||gamepad2.right_bumper && !kid){
+            if (gamepad1.right_bumper || gamepad2.right_bumper && !kid) {
                 Mary.claw.release();
             }
 
-            if(gamepad1.dpad_right||gamepad2.dpad_right && !kid){
-                movement = ClawMovement.OUT;
-                clawtime = System.currentTimeMillis();
-                up = false;
+            if (gamepad1.dpad_right || gamepad2.dpad_right && !kid) {
+//                movement = ClawMovement.OUT;
+//                clawtime = System.currentTimeMillis();
+                Mary.claw.out();
+//                up = false;
             }
 
-            if(gamepad1.dpad_left|| gamepad2.dpad_left && !kid){
-                movement = ClawMovement.IN;
-                clawtime = System.currentTimeMillis();
-                up = false;
+            if (gamepad1.dpad_left || gamepad2.dpad_left && !kid) {
+//                movement = ClawMovement.IN;
+//                clawtime = System.currentTimeMillis();
+                Mary.claw.in();
+//                up = false;
             }
 
-            if((gamepad1.left_stick_button|| gamepad2.left_stick_button && !kid) && !up){
-                movement = ClawMovement.UP;
-                clawtime = System.currentTimeMillis();
-                up = true;
+            if ((gamepad1.left_stick_button || gamepad2.left_stick_button && !kid)) {
+//                movement = ClawMovement.UP;
+//                clawtime = System.currentTimeMillis();
+//                up = true;
+                Mary.claw.up();
             }
 
-            if(movement != ClawMovement.NONE) {
-                if ((movement == ClawMovement.IN && Mary.claw.getPosition() <= Mary.claw.IN) ||
-                        (movement == ClawMovement.OUT && Mary.claw.getPosition() == Mary.claw.OUT) ||
-                        (movement == ClawMovement.UP && Mary.claw.getPosition() == Mary.claw.UP))  {
-                        movement = ClawMovement.NONE;
-                }
+//            // Wall
+            if(gamepad1.right_trigger >= 0.1 || gamepad2.right_trigger >= 0.1) {
+                Mary.wall.down();
+            }
+            if(gamepad2.left_trigger >= 0.1 || gamepad2.left_trigger >= 0.1) {
+                Mary.wall.up();
             }
 
-            if(System.currentTimeMillis() - clawtime > 10) {
-                if(movement == ClawMovement.IN) {
-                    Mary.claw.move(false);
-                } else if (movement == ClawMovement.OUT) {
-                    Mary.claw.move(true);
-                } else if (movement == ClawMovement.UP) {
-                    if(Mary.claw.getPosition() < Mary.claw.UP) {
-                         Mary.claw.move(true);
-                    } else {
-                        Mary.claw.move(false);
-                    }
-                }
-                clawtime = System.currentTimeMillis();
-            }
-
-            // Send diagnostics to user
-            telemetry.addData("Status", "Running");
         }
+
+        if (movement != ClawMovement.NONE) {
+            if ((movement == ClawMovement.IN && Mary.claw.getPosition() <= Mary.claw.IN) ||
+                    (movement == ClawMovement.OUT && Mary.claw.getPosition() == Mary.claw.OUT) ||
+                    (movement == ClawMovement.UP && Mary.claw.getPosition() == Mary.claw.UP)) {
+                movement = ClawMovement.NONE;
+            }
+        }
+
+        if (System.currentTimeMillis() - clawtime > 10) {
+            if (movement == ClawMovement.IN) {
+                Mary.claw.move(false);
+            } else if (movement == ClawMovement.OUT) {
+                Mary.claw.move(true);
+            } else if (movement == ClawMovement.UP) {
+                if (Mary.claw.getPosition() < Mary.claw.UP) {
+                    Mary.claw.move(true);
+                } else {
+                    Mary.claw.move(false);
+                }
+            }
+            clawtime = System.currentTimeMillis();
+        }
+
+        // Send diagnostics to user
+        telemetry.addData("Status", "Running");
     }
 
     private enum ClawMovement {
